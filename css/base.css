@@ -1,7 +1,9 @@
 body{
 background:url('/image/head.jpg') no-repeat top center;
 }
-a{text-decoration:none;}
+a{text-decoration:none;color:#111;}
+a:visited{color:#333;}
+a:hover{color:#aaa;}
 .wrap{width:980px;margin:0px auto;padding:0px;text-align:center;}
 .body{width:916px;}
 ul ,ol,li{margin:0px;padding:0px;list-style-type:none;}

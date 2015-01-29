@@ -7,23 +7,24 @@ include './cgi/pdo.php';
 <html>
 	<head>
 		<link type="text/css" rel="stylesheet" href="/css/base.css" />
+		<link type="text/css" rel="stylesheet" href="/css/school.css" />
 
 	</head>
 	<body>
-		<?php include 'cgi/header.php' ?>
-		
+		<?php Render('header')?>
 		<div class="blockborder wrap body">
-			<ul>
+			<ul class="SchoolList">
 				<?php
-					$sth = $pdomysql -> prepare("select * from tbSchoolInfo where status=1 order by `order`;"); 
-					$sth -> execute();
-					foreach($sth -> fetchAll(PDO::FETCH_ASSOC) as $item){
-						echo '<li>',$item['name'],</li>';
+					$sthSchool = $pdomysql -> prepare("select * from tbSchoolInfo where status=1 order by `order` desc;"); 
+					$sthSchool -> execute();
+					foreach($sthSchool -> fetchAll(PDO::FETCH_ASSOC) as $school){
+						echo '<li class="SchoolItem">';
+						echo '<h2 class="SchoolTitle"><a href="',ActionLink('list','class',array('schoolid' => $school['id']),false),'">',$school['name'],'</a></h2>';
+						echo '</li>';
 					}
 				?>
 			</ul>
 		</div>
-		
-		<?php include 'cgi/footer.php' ?>
+		<?php Render('footer')?>
 	</body>
 </html>

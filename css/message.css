@@ -10,10 +10,10 @@
 .body  fieldset{
 	margin:10px 15px;
 	text-align:center;
+	border-style:none;
 }
 .body  fieldset legend{
 	font-weight:bolder;
-	
 }
 
 .editortemplate{

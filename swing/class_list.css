@@ -1,0 +1,10 @@
+.status1{
+	color:green;
+}
+.status2{
+	color:red;
+}
+
+.status1:hover,.status2:hover{
+	color:default;
+}

@@ -1,17 +1,26 @@
 <?php
+	if(!defined('DIRECTORY_SEPATRATOR')) define('DIRECTORY_SEPATRATOR','/');
+	
 	ob_start();
-	function ActionLink($action='',$model='',$opts=null,$return=false){
-		$ext = '';
-		if(!empty($opts) && sizeof($opts)>0){
-			foreach($opts as $k=>$v){
-				$ext .= "&$k=";
-				$ext .= urlencode($v);
+	function ActionLink($action='',$model='',$opts=null,$echo=true){
+		$result = array();
+		$result[] = 'model='.urlencode($model);
+		$result[] = 'action='.urlencode($action);
+		if(!empty($opts)){
+			foreach($opts as $k => $v){
+				$result[] = $k.'='.urlencode($v);
 			}
 		}
-		if($return)
-			return '?model='.urlencode($model).'&action='.urlencode($action).$ext;
-		else
-			echo '?model='.urlencode($model).'&action='.urlencode($action).$ext;
+		if($echo)
+			echo '?'.implode('&',$result);
+		return '?'.implode('&',$result);
+	}
+	
+	function Render(){
+		$params = func_get_args();
+		if(empty($params))return;
+		$params = array_reverse($params);
+		include './cgi/'.implode(DIRECTORY_SEPATRATOR,$params).'.php';
 	}
 	
 	$model="index";
@@ -27,7 +36,9 @@
 	define('Action',$action);
 	define('Execute',true);
 	
-	if(file_exists("cgi/$model/$action.php")){
-		require "cgi/$model/$action.php";
+	if(file_exists("./cgi/$model/$action.php")){
+		require "./cgi/$model/$action.php";
+	}else{
+		require "./cgi/index/index.php";
 	}
 ?>

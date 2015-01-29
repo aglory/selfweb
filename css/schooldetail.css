@@ -1,0 +1,37 @@
+table.class{
+	margin: 1% 1%;
+	border:1px solid #e2e2e2;
+	border-radius:10px;
+	text-align:left;
+	width:98%;
+}
+
+.class .preferential,.class .description{
+	vertical-align:top;
+}
+
+table.class .name{
+	background:url('/image/boxcontrol.jpg') repeat-x top center;
+}
+table.class .name h3{
+}
+table.class .name .apply{
+	float:right;
+	display:block;
+	line-height:62px;
+	margin-right:5px;
+	display:none;
+}
+table.class .name .apply:after{
+clear:both;
+display:block;
+content:
+}
+.class td.colt{
+	width:20%;
+}
+.class td.colv{
+	width:80%;
+}
+
+

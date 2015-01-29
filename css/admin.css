@@ -1,0 +1,34 @@
+#tbContent{
+	width:100%;
+}
+.celTelephone{
+	width:120px;
+}
+.colOperator{
+	text-align:center;
+}
+.celStatus{
+	width:60px;
+}
+
+.statu_start{
+	color:green;
+}
+.statu_stop{
+	color:red;
+}
+
+
+.btnenable{
+	color:green;
+}
+.btndisable{
+	color:red;
+}
+.btneditor{
+	color:black;
+}
+
+a{
+	text-decoration:none;
+}

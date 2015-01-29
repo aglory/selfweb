@@ -1,0 +1,29 @@
+.Description{
+	text-align:left;
+}
+
+.SchoolList,.ClassList{
+	margin:0 20px;
+}
+
+.SchoolItem, .ClassItem{
+	white-space:normal;
+	text-align:left;
+	margin:3px auto;
+}
+
+.preferential{
+	color:red;
+	text-align:left;
+	margin:0px;
+	font-style:italic;
+}
+
+.Description{
+	text-align:left;
+	text-indent:40px;;
+}
+
+.SchoolList a:hover{
+	font-style:italic;
+}

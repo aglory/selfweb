@@ -9,14 +9,13 @@ header("Content-Type: text/html;charset=utf-8");
 		<link type="text/css" rel="stylesheet" href="/css/message.css" />
 	</head>
 	<body>
-		<?php include 'cgi/header.php' ?>
-		
+		<?php Render('header')?>
 		<div class="blockborder wrap body">
 		
 		
 			<fieldset>
 				<legend>
-					留言资讯：
+					留言资讯
 				</legend>
 				<form id="frmSubmit" method='post' action='<?php ActionLink('post','message') ?>'>
 				<table class="editortemplate">
@@ -53,6 +52,20 @@ header("Content-Type: text/html;charset=utf-8");
 		
 			</fieldset>
 		</div>
-		<?php include 'cgi/footer.php' ?>
+		<?php Render('footer')?>
 	</body>
+	<script type="text/javascript">
+		/*
+		document.getElementById("btSubmit").onclick=function(){
+			var tel = document.getElementById('tel').value);
+			if(tel.length == 0){
+				return false;
+			}
+			if(!/^1\d{10}$/.test(tel){
+				alert('电话号码错误');
+				return false;
+			}
+		}
+		*/
+	</script>
 </html>

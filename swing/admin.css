@@ -1,0 +1,82 @@
+.btn{
+	cursor:pointer;
+}
+
+
+.mark{color:green;}
+.unmark,.warn{color:red;}
+.info{color:yellow;}
+
+.message:after,.pagerRemark:after,.pages:after{
+    content: "."; 
+    display: block;
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+#pager .pages li{
+	background-image:none;
+}
+
+.btnenable{
+	color:green;
+}
+.btndisable{
+	color:red;
+}
+.btneditor{
+	color:black;
+}
+
+a{
+	text-decoration:none;
+}
+
+.container_12 li{
+	background-position:center;
+}
+#navlogo{
+	background-image:url('/images/Logo_bg.png');
+}
+
+#navindex{
+}
+
+#navmessage{
+	background-image:url('/images/g_10.jpg');
+}
+#navmessage:hover{
+	background-image:url('/images/gb_10.jpg');
+}
+
+#navschool{
+	background-image:url('/images/re_03.png');
+}
+#navschool:hover{
+	background-image:url('/images/reb_03.png');
+}
+
+#navclass{
+	background-image:url('/images/ad_07.png');
+}
+
+#navclass:hover{
+	background-image:url('/images/adr_07.png');
+}
+
+
+#editorForm table{
+	width:100%;
+}
+#editorForm td.title{
+	width:20%;
+}
+#editorForm input.value,#editorForm textarea.value{
+	width:80%;
+}
+
+
+
+
+
+
