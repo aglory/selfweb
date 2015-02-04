@@ -19,6 +19,10 @@
 		$id = intval($_REQUEST['id']);
 	}
 	
+	if(array_key_exists('schoolid' ,$_REQUEST)){
+		$schoolid = intval($_REQUEST['schoolid']);
+	}
+	
 	if(!empty($id)){
 		$sth = $pdomysql -> prepare("select * from tbClassInfo where id=$id");
 		$sth -> execute();
@@ -32,6 +36,10 @@
 			$teachunit = $item['teachunit'];
 			$levecount = $item['levecount'];
 			$preferential = $item['preferential'];
+			
+			
+			echo $schoolid ,"_", $item['schoolid'];
+			
 		}
 	}
 ?>
@@ -56,7 +64,7 @@
 					<select name ="schoolid">
 						<option value="0">无</option>
 						<?php
-						$sthschools = $pdomysql -> prepare("select id,name from tbSchoolInfo where id = $id or status = 1;");
+						$sthschools = $pdomysql -> prepare("select id,name from tbSchoolInfo where id = $schoolid or status = 1;");
 						$sthschools -> execute();
 						foreach($sthschools -> fetchAll(PDO::FETCH_ASSOC) as $item){
 							echo '<option value="'.$item['id'].'"'.($item['id'] == $schoolid?' selected="selected"':'').'>'.htmlspecialchars($item['name']).'</option>';

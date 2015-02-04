@@ -2,7 +2,7 @@
 	if(!defined('Execute') && !defined('Administartor')){ exit();}
 	function funRenderOperator($o){
 		$btn = array();
-		$btn[] = '<a class="btn editor" title="编辑" href="'.ActionLink('dialogeditor','class',array('id' => $o['id']),false).'">编辑</a>';
+		$btn[] = '<a class="btn editor" title="编辑" href="'.ActionLink('dialogeditor','class',array('id' => $o['id'], 'schoolid' => $o['schoolid']),false).'">编辑</a>';
 		if($o['status']==1){
 			$btn[] = '<a class="btn status status1" href="'.ActionLink('ajaxchangestatus','class',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
 		}else if($o['status'] == 2){

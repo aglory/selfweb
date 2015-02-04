@@ -1,5 +1,9 @@
 <?php
 	if(!defined('Execute') && !defined('Administartor')){ exit();}
+	$schoolid = 0;
+	if(array_key_exists('schoolid',$_GET)){
+		$schoolid = intval($_GET['schoolid']);
+	}
 ?>
 <script type="text/javascript" src="/js/kindeditor/kindeditor-min.js"></script>
 <article class="container_12">
@@ -9,10 +13,10 @@
 				<input type="hidden" id="pageIndex" name="pageIndex" value="1" />
 				<input type="hidden" id="pageSize" name="pageSize" value="20" />
 				<input type="hidden" id="orderBy" name="orderBy" value="" />
-				<input type="hidden" id="schoolid" name="schoolid" value="<?php if(array_key_exists('schoolid',$_GET)){ echo $_GET['schoolid'];} else {echo '0';} ?>" />
+				<input type="hidden" id="schoolid" name="schoolid" value="<?php echo $schoolid?>" />
                 <h1>班级管理</h1>	
 		        <div class="block-controls">
-				    <div class="AddLink"><a class="editor" href="<?php ActionLink('dialogeditor','class',array('id' => 0))?>" title="新增班级"><span></span><q>新增班级</q></a></div>
+				    <div class="AddLink"><a class="editor" href="<?php ActionLink('dialogeditor','class',array('id' => 0 ,'schoolid' => $schoolid))?>" title="新增班级"><span></span><q>新增班级</q></a></div>
 			        <ul class="controls-buttons">
 						<li>无学校<input name="noschoolid" type="checkbox" value="1" /> </li>
 						<li><input name="schoolname" type="text" value="" placeholder="输入学校名称查询" /></li>
