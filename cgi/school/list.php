@@ -19,7 +19,7 @@ include './cgi/pdo.php';
 					$sthSchool -> execute();
 					foreach($sthSchool -> fetchAll(PDO::FETCH_ASSOC) as $school){
 						echo '<li class="SchoolItem">';
-						echo '<h2 class="SchoolTitle"><a href="',ActionLink('list','class',array('schoolid' => $school['id']),false),'">',$school['name'],'</a></h2>';
+						echo '<h2 class="SchoolTitle"><a href="',ActionLink('list','class',array('schoolid' => $school['guid']),false),'">',$school['name'],'</a></h2>';
 						echo '</li>';
 					}
 				?>

@@ -2,10 +2,6 @@
 if(!defined('Execute')){ exit();}
 header("Content-Type: text/html;charset=utf-8");
 include './cgi/pdo.php';
-$id = 0;
-if(array_key_exists('schoolid',$_GET)){
-	$id = intval($_GET['schoolid']);
-}
 
 function funLeveCount($item){
 	if($item['levecount'] == 0){
@@ -29,9 +25,15 @@ function funLeveCount($item){
 		
 		<div class="blockborder wrap body">
 			<?php
-				$sthschool = $pdomysql -> prepare("select * from tbSchoolInfo where id = $id;"); 
+				$sthschool = $pdomysql -> prepare("select * from tbSchoolInfo where guid = :guid;"); 
 				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by 'order' desc;");
-				$sthschool -> execute();
+				
+				$guid = '';
+				if(array_key_exists('schoolid' , $_GET)){
+					$guid = $_GET['schoolid'];
+				}
+				
+				$sthschool -> execute(array('guid' => $guid));
 				$teachunits = array('0' => '' , '1' => '年' , '2' => '月', '3' => '天', '4' => '小时');
 
 				$diplomabefores = array('1' => '小学','2' => '初中','4' => '高中' ,'8' => '中专' ,'16' => '大专','32' => '本科');
@@ -41,7 +43,7 @@ function funLeveCount($item){
 					echo '<h1>',$school['name'],'</h1>';
 					$sthclass -> execute(array('id' => $school['id']));
 					foreach($sthclass -> fetchAll(PDO::FETCH_ASSOC) as $class){
-						echo '<table class="class" id="class',$class['id'],'"> ';
+						echo '<table class="class" id="class',$class['guid'],'"> ';
 						
 						echo '<tr><td class="colt name" colspan="2"><h3>',$class['name'],'</h3>';
 						if(!empty($class['levecount'])){
