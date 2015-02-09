@@ -7,6 +7,8 @@ $ext_arr = array(
 	'zip','rar','z7'
 );
 $result = array('error' => 1, 'message' => '未知错误');
+header('Content-type: application/json; charset=UTF-8');
+
 foreach($_FILES as $file){
 	if($file['error'] > 0){
 		continue;
@@ -24,7 +26,6 @@ foreach($_FILES as $file){
 	copy($file['tmp_name'],'.'.$urlpath.'/'.$urlname);
 	$result = array('error' => 0 , 'url' => $urlpath.'/'.$urlname);
 }
-header('Content-type: application/json; charset=UTF-8');
 echo json_encode($result,true);
 
 //输出JSON字符串

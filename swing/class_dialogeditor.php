@@ -7,7 +7,8 @@
 	$description='';						//简介
 	//$order=0;								//顺序
 	//$status=0;								//状态(1:正常,2:删除)				
-	$requiredlevel=0;						//入学条件(1:小学，2：初中，3：高中)
+	$diplomabefore=0;						//入学条件(1:小学，2：初中，4：高中，8：中专，16：大专，32：本科)
+	$diplomaafter=0;						//毕业文凭(1:小学，2：初中，4：高中，8：中专，16：大专，32：本科)
 	$teachdate=0;							//学制
 	$teachunit=0;							//时间单位（1：年，2：月，3：天，4：小时）
 	//$datecreate='';							//建立时间
@@ -31,15 +32,12 @@
 			$name = $item['name'];
 			$price = $item['price'];
 			$description = $item['description'];
-			$requiredlevel = $item['requiredlevel'];
+			$diplomabefore = $item['diplomabefore'];
+			$diplomaafter = $item['diplomaafter'];
 			$teachdate = $item['teachdate'];
 			$teachunit = $item['teachunit'];
 			$levecount = $item['levecount'];
 			$preferential = $item['preferential'];
-			
-			
-			echo $schoolid ,"_", $item['schoolid'];
-			
 		}
 	}
 ?>
@@ -83,18 +81,30 @@
 			</tr>
 			<tr>
 				<td class="title">
-					条件：
+					入学条件：
 				</td>
 				<td>
-					<select name="requiredlevel">
-						<option value='0'></option>
-						<?php
-						$requiredlevels = array('0' => '无','1' => '小学','2' => '初中','3' => '高中');
-						foreach($requiredlevels as $key => $value){
-							echo '<option value="'.$key.'"'.($requiredlevel==$key?' selected="selected"':'').'>'.htmlspecialchars($value).'</option>';
-						}
-						?>
-					</select>
+					<?php
+					$diplomabefores = array('1' => '小学','2' => '初中','4' => '高中' ,'8' => '中专' ,'16' => '大专','32' => '本科');
+					
+					
+					foreach($diplomabefores as $key => $value){
+						echo '<span class="inputgroup"><label for="diplomabefores'.$value.'">'.htmlspecialchars($value).'</label><input id="diplomabefores'.$value.'" name="diplomabefore[]" type="checkbox" value="'.$key.'"'.(((intval($diplomabefore) & intval($key)) > 0)?' checked="checked"':'').' /></span>';
+					}
+					?>
+				</td>
+			</tr>
+			<tr>
+				<td class="title">
+					颁发文凭：
+				</td>
+				<td>
+					<?php
+					$diplomaafters = array('1' => '小学','2' => '初中','4' => '高中' ,'8' => '中专' ,'16' => '大专','32' => '本科');
+					foreach($diplomaafters as $key => $value){
+						echo '<span class="inputgroup"><label for="diplomaafters'.$value.'">'.htmlspecialchars($value).'</label><input id="diplomaafters'.$value.'" name="diplomaafter[]" type="checkbox" value="'.$key.'"'.(((intval($diplomaafter) & intval($key)) > 0)?' checked="checked"':'').' /></span>';
+					}
+					?>
 				</td>
 			</tr>
 			<tr>

@@ -6,7 +6,8 @@
 	$name='';								//课名
 	$price='';								//价格,小于0表示没有	
 	$description='';						//简介		
-	$requiredlevel=0;						//入学条件(1:小学，2：初中，3：高中)
+	$diplomabefore=0;						//入学条件(1:小学，2：初中，4：高中，8：中专，16：大专，32：本科)
+	$diplomaafter=0;						//毕业文凭(1:小学，2：初中，4：高中，8：中专，16：大专，32：本科)
 	$teachdate=0;							//学制
 	$teachunit=0;							//时间单位（1：年，2：月，3：天，4：小时）
 	$levecount= -1;							//剩余名额
@@ -27,9 +28,18 @@
 	if(array_key_exists('description',$_REQUEST)){
 		$description = $_REQUEST['description'];
 	}
-	if(array_key_exists('requiredlevel',$_REQUEST)){
-		$requiredlevel = intval($_REQUEST['requiredlevel']);
+	if(array_key_exists('diplomabefore',$_REQUEST) && !empty($_REQUEST['diplomabefore'])){
+		foreach($_REQUEST['diplomabefore'] as $item){
+			$diplomabefore |= intval($item);
+		}
 	}
+	if(array_key_exists('diplomaafter',$_REQUEST) && !empty($_REQUEST['diplomaafter'])){
+		foreach($_REQUEST['diplomaafter'] as $item){
+			$diplomaafter |= intval($item);
+		}
+	}
+	
+	
 	if(array_key_exists('teachdate',$_REQUEST)){
 		$teachdate = intval($_REQUEST['teachdate']);
 	}
@@ -46,14 +56,13 @@
 	$timespan = date('Y-m-d H:i:s',time());
 	
 	
-
-	
 	if(empty($id)){
 		$sth = $pdomysql -> prepare('insert into tbClassInfo(schoolid,
 name,
 price,
 description,
-requiredlevel,
+diplomabefore,
+diplomaafter,
 teachdate,
 teachunit,
 levecount,
@@ -66,7 +75,8 @@ status
 :name,
 :price,
 :description,
-:requiredlevel,
+:diplomabefore,
+:diplomaafter,
 :teachdate,
 :teachunit,
 :levecount,
@@ -78,7 +88,8 @@ status
 			'schoolid' => $schoolid,
 			'name' => $name,
 			'price' => $price,
-			'requiredlevel' => $requiredlevel,
+			'diplomabefore' => $diplomabefore,
+			'diplomaafter' => $diplomaafter,
 			'teachdate' => $teachdate,
 			'teachunit' => $teachunit,
 			'levecount' => $levecount,
@@ -95,7 +106,8 @@ schoolid = :schoolid,
 name = :name,
 price = :price,
 description = :description,
-requiredlevel = :requiredlevel,
+diplomabefore = :diplomabefore,
+diplomaafter = :diplomaafter,
 teachdate = :teachdate,
 teachunit = :teachunit,
 levecount = :levecount,
@@ -107,7 +119,8 @@ where id='.$id);
 'name' => $name,
 'price' => $price,
 'description' => $description,
-'requiredlevel' => $requiredlevel,
+'diplomabefore' => $diplomabefore,
+'diplomaafter' => $diplomaafter,
 'teachdate' => $teachdate,
 'teachunit' => $teachunit,
 'levecount' => $levecount,

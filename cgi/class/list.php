@@ -33,8 +33,10 @@ function funLeveCount($item){
 				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by 'order' desc;");
 				$sthschool -> execute();
 				$teachunits = array('0' => '' , '1' => '年' , '2' => '月', '3' => '天', '4' => '小时');
-				$requiredlevels = array('0' => '无' , '1' => '小学' , '2' => '初中' , '3' => '高中');
-				
+
+				$diplomabefores = array('1' => '小学','2' => '初中','4' => '高中' ,'8' => '中专' ,'16' => '大专','32' => '本科');
+				$diplomaafters = array('1' => '小学','2' => '初中','4' => '高中' ,'8' => '中专' ,'16' => '大专','32' => '本科');
+
 				foreach($sthschool -> fetchAll(PDO::FETCH_ASSOC) as $school){
 					echo '<h1>',$school['name'],'</h1>';
 					$sthclass -> execute(array('id' => $school['id']));
@@ -55,7 +57,29 @@ function funLeveCount($item){
 						}
 						echo '</td></tr>';
 						
-						echo '<tr><td><span class="colt">学历要求</span></td><td class="colv">',$requiredlevels[$class['requiredlevel']],'</td></tr>';
+						$diplomabefore = array();
+						$diplomaafter = array();
+						
+						
+						foreach($diplomabefores  as $item_key => $item_value){
+							if((intval($item_key) & intval($class['diplomabefore'])) > 0){
+								$diplomabefore[] = $item_value;
+							}
+						}
+						
+						foreach($diplomaafters  as $item_key => $item_value){
+							if((intval($item_key) & intval($class['diplomaafter'])) > 0){
+								$diplomaafter[] = $item_value;
+							}
+						}
+						
+						if(!empty($diplomabefore)){
+							echo '<tr><td><span class="colt">学历要求</span></td><td class="colv">',implode('、',$diplomabefore),'</td></tr>';
+						}
+						
+						if(!empty($diplomaafter)){
+							echo '<tr><td><span class="colt">毕业文凭</span></td><td class="colv">',implode('、',$diplomaafter),'</td></tr>';
+						}
 						
 						echo '<tr><td class="colt">学费</td><td class="colv">';
 						if($class['price']> 0){
