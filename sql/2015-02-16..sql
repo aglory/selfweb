@@ -32,4 +32,3 @@ create table tbJobInfo(
 	status int not null default 0 comment '状态(1:正常,2:停用)'
 	
 )engine = 'MyISAM' comment '安置就业';
-
