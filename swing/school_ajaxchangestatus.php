@@ -6,7 +6,7 @@
 		$id = $_GET['id'];
 	}
 	if(array_key_exists('status',$_GET)){
-		$status = $_GET['status'];
+		$status = intval($_GET['status']);
 	}
 	
 	if(empty($id) || empty($status)){

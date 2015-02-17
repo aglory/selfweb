@@ -69,6 +69,12 @@ header("Content-Type: text/html;charset=utf-8");
 			<li id="navclass">
 				<a class="navigationitem" href='<?php ActionLink('list','class') ?>'>班级管理</a>
 			</li>
+			<li id="navcategory">
+				<a class="navigationitem" href='<?php ActionLink('list','category') ?>'>分类管理</a>
+			</li>
+			<li id="navjob">
+				<a class="navigationitem" href='<?php ActionLink('list','job') ?>'>就业管理</a>
+			</li>
 			
 		</ul> 
          

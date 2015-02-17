@@ -42,12 +42,13 @@ function funLeveCount($item){
 				foreach($sthschool -> fetchAll(PDO::FETCH_ASSOC) as $school){
 					echo '<h1>',$school['name'],'</h1>';
 					$sthclass -> execute(array('id' => $school['id']));
+					
 					foreach($sthclass -> fetchAll(PDO::FETCH_ASSOC) as $class){
 						echo '<table class="class" id="class',$class['guid'],'"> ';
 						
 						echo '<tr><td class="colt name" colspan="2"><h3>',$class['name'],'</h3>';
 						if(!empty($class['levecount'])){
-							echo '<a class="apply" href="',ActionLink('apply','class',array('schoolid' => $school['id'],'classid' => $class['id']),false),'">在线报名</a>';
+							echo '<a class="apply" href="',ActionLink('apply','class',array('schoolid' => urlencode($school['guid']),'classid' => urlencode($class['guid'])),false),'">在线报名</a>';
 						}
 						echo '</td></tr>';
 						
@@ -74,7 +75,6 @@ function funLeveCount($item){
 								$diplomaafter[] = $item_value;
 							}
 						}
-						
 						if(!empty($diplomabefore)){
 							echo '<tr><td><span class="colt">学历要求</span></td><td class="colv">',implode('、',$diplomabefore),'</td></tr>';
 						}

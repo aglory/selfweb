@@ -1,0 +1,56 @@
+table.class{
+	margin: 1% 1%;
+	border:1px solid #e2e2e2;
+	border-radius:10px;
+	text-align:left;
+	width:98%;
+}
+
+.class .preferential,.class .description{
+	vertical-align:top;
+}
+
+table.class .name{
+	background:url('/image/boxcontrol.jpg') repeat-x top center;
+}
+table.class .name h3{
+}
+table.class .name .apply{
+	float:right;
+	display:block;
+	line-height:62px;
+	margin-right:5px;
+	display:none;
+}
+table.class .name .apply:after{
+clear:both;
+display:block;
+content:
+}
+table.class .price{
+	width:20%;
+	text-align:right;
+}
+table.class .method{
+	width:20%;
+	text-align:center;
+}
+.search{
+	width:916px;
+	margin-bottom:10px;
+}
+
+.coltitle{
+	width:10%;
+}
+.colvalue{
+	width:90%;
+	text-align:left;
+}
+.colvalue a{
+	margin:5px;
+}
+
+.search a.active{
+	color:red;
+}
