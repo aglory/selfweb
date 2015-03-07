@@ -58,7 +58,7 @@ header("Content-Type: text/html;charset=utf-8");
                 <div class="logo"></div>
             </li>
 			<li id="navindex">
-				<a class="navigationitem" href='<?php ActionLink('index','index') ?>'>首页</a>
+				<a class="navigationitem" href='<?php ActionLink('list','apply') ?>'>首页</a>
 			</li>
 			<li id="navmessage">
 				<a class="navigationitem" href='<?php ActionLink('list','message') ?>'>消息管理</a>
