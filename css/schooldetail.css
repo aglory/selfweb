@@ -13,14 +13,16 @@ table.class{
 table.class .name{
 	background:url('/image/boxcontrol.jpg') repeat-x top center;
 }
-table.class .name h3{
+table.class .name .title{
+	float:left;
+	display:block;
 }
 table.class .name .apply{
 	float:right;
-	display:block;
-	line-height:62px;
-	margin-right:5px;
-	display:none;
+	display:block
+	width:200px;
+	height:60px;
+	color:red;
 }
 table.class .name .apply:after{
 clear:both;

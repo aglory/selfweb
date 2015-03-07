@@ -46,10 +46,12 @@ function funLeveCount($item){
 					foreach($sthclass -> fetchAll(PDO::FETCH_ASSOC) as $class){
 						echo '<table class="class" id="class',$class['guid'],'"> ';
 						
-						echo '<tr><td class="colt name" colspan="2"><h3>',$class['name'],'</h3>';
+						echo '<tr><td class="colt name" colspan="2"><h3><span class="title">',$class['name'];
+						echo '</span>';
 						if(!empty($class['levecount'])){
-							echo '<a class="apply" href="',ActionLink('apply','class',array('schoolid' => urlencode($school['guid']),'classid' => urlencode($class['guid'])),false),'">在线报名</a>';
+							echo '<a class="apply" href="',ActionLink('apply','apply',array('schoolid' => urlencode($school['guid']),'classid' => urlencode($class['guid'])),false),'">在线报名</a>';
 						}
+						echo '</h3>';
 						echo '</td></tr>';
 						
 						echo '<tr><td class="colt"><span>学时</span></td><td><span class="colv">';
