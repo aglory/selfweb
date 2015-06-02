@@ -10,7 +10,7 @@ function funLeveCount($item){
 	if($item['levecount'] <10 ){
 		return '<span>稀少</span><a class="apply" href="'.ActionLink('apply','class',array('schoolid' => $item['schoolid'],'classid' => $item['id']),false).'">抢名额</a>';
 	}
-	return '<span>少量</span><a class="apply" href="'.ActionLink('apply','class',array('schoolid' => $item['schoolid'],'classid' => $item['id']),false).'">挣名额</a>';
+	return '<span>少量</span><a class="apply" href="'.ActionLink('apply','class',array('schoolid' => $item['schoolid'],'classid' => $item['id']),false).'">争名额</a>';
 }
 
 ?>
@@ -26,7 +26,7 @@ function funLeveCount($item){
 		<div class="blockborder wrap body">
 			<?php
 				$sthschool = $pdomysql -> prepare("select * from tbSchoolInfo where guid = :guid;"); 
-				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by 'order' desc;");
+				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by `order` desc,id desc;");
 				
 				$guid = '';
 				if(array_key_exists('schoolid' , $_GET)){
