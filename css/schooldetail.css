@@ -35,5 +35,6 @@ content:
 .class td.colv{
 	width:80%;
 }
-
-
+.class td.colv .table{
+	width:100%;
+}
