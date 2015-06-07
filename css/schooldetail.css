@@ -38,3 +38,11 @@ content:
 .class td.colv .table{
 	width:100%;
 }
+.class td.colv li{
+	white-space:normal;
+	overflow:visible;
+	list-style-type:decimal;
+	margin-left:30px;
+	color:#64451D;
+}
+
