@@ -6,8 +6,9 @@ include './cgi/pdo.php';
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta name="keywords"content="永恒的父爱,信息咨询" />
 		<link type="text/css" rel="stylesheet" href="/css/base.css" />
-
+		<meta name="sogou_site_verification" content="Dg3fhbzIql"/>
 	</head>
 	<body>
 		<?php include 'cgi/header.php' ?>

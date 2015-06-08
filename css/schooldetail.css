@@ -37,6 +37,7 @@ content:
 }
 .class td.colv .table{
 	width:100%;
+	border:1px solid #e2e2e2;
 }
 .class td.colv li{
 	white-space:normal;
@@ -45,4 +46,15 @@ content:
 	margin-left:30px;
 	color:#64451D;
 }
-
+.class .t_l:{
+	text-align:left;
+}
+.class .t_r:{
+	text-align:right;
+}
+.class .v_m{
+	vertical-align:middle;
+}
+.class .v_t{
+	vertical-align:top;
+}
