@@ -1,33 +1,31 @@
 <?php
+	if(!defined('Execute') && !defined('Administartor')){ exit();}
 	header('Content-Type: application/json');	
 	
-	$id = 0;$status = 0;
+	$id = 0;$order = 0;
 	if(array_key_exists('id',$_GET)){
 		$id = $_GET['id'];
 	}
-	if(array_key_exists('status',$_GET)){
-		$status = intval($_GET['status']);
+	if(array_key_exists('order',$_GET)){
+		$order = intval($_GET['order']);
 	}
 	
-	if(empty($id) || empty($status)){
+	if(empty($id)){
 		echo json_encode(array('status' => false,'message' => '数据错误'),true);
 		exit(1);
 	}
 	
-	$status = 3 - $status;
 	$timespan = date('Y-m-d H:i:s',time());
-	
-	$sth = $pdomysql -> prepare("update tbClassInfo set `status` = $status,datemodify='$timespan' where `id` = $id;");
-	$count = $sth -> execute();
-	
 	$errors = array();
+	
+	$sth = $pdomysql -> prepare("update tbCategoryInfo set `order` = $order,datemodify='$timespan'  where `id` = $id;");
+	$count = $sth -> execute();
 	$error = $sth -> errorInfo();
 	if($error[0] > 0){
 		$errors[] = $error[2];
 	}
 	
 	$result = array();
-	$result['count'] = $count;
 	$result['status'] = count($errors) == 0 ? true : false; 
 	$result['message'] = implode('\r\n',$errors);
 	

@@ -8,8 +8,8 @@ div.sticky { font-size: 14px; color: #555; display: none; position: relative; pa
 .bottom-right, .bottom-left { bottom: -2px; border-radius: 6px; }
 .border-top-right, .border-top-left, .border-top-center { border-top: 1px solid #eee; border-top: 1px solid rgba(0,0,0,.1); }
 .border-bottom-right, .border-bottom-left { border-bottom: 1px solid #eee; border-bottom: 1px solid rgba(0,0,0,.1); }
-.sticky.st-error { color: red; padding-left: 60px; height: 75px; padding-top: 50px; background-image: url(../../Content/images/warning.png); background-repeat: no-repeat; background-position: 10px center; }
-.sticky.st-success { color: #7fae00; padding-left: 60px; height: 75px; padding-top: 50px; background-image: url(../../Content/images/success.png); background-repeat: no-repeat; background-position: left center; }
+.sticky.st-error { color: red; padding-left: 60px; height: 75px; padding-top: 50px; background-image: url('warning.png'); background-repeat: no-repeat; background-position: 10px center; }
+.sticky.st-success { color: #7fae00; padding-left: 60px; height: 75px; padding-top: 50px; background-image: url('success.png'); background-repeat: no-repeat; background-position: left center; }
 .sticky.st-info { color: #00a6fc; height: 75px; line-height: 22px; padding-top: 50px; }
 .top-right, .bottom-right { right: 20px; }
 .top-left, .bottom-left { left: 20px; }

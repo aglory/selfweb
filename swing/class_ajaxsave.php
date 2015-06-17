@@ -57,7 +57,9 @@
 	
 	
 	if(empty($id)){
-		$sth = $pdomysql -> prepare('insert into tbClassInfo(schoolid,
+		$sth = $pdomysql -> prepare('insert into tbClassInfo(
+guid,
+schoolid,
 name,
 price,
 description,
@@ -71,6 +73,7 @@ datecreate,
 datemodify,
 status
 )values(
+:guid,
 :schoolid,
 :name,
 :price,
@@ -83,7 +86,7 @@ status
 :preferential,
 :datecreate,
 :datemodify,
-1);');
+2);');
 		$sth -> execute(array(
 			'schoolid' => $schoolid,
 			'name' => $name,
@@ -96,7 +99,8 @@ status
 			'preferential' => $preferential,
 			'description' => $description,
 			'datecreate' => $timespan,
-			'datemodify' => $timespan
+			'datemodify' => $timespan,
+			'guid' => md5(mt_rand())
 		));
 		
 		$id = $pdomysql->lastInsertId();

@@ -8,7 +8,6 @@ include './cgi/pdo.php';
 	<head>
 		<link type="text/css" rel="stylesheet" href="/css/base.css" />
 		<link type="text/css" rel="stylesheet" href="/css/school.css" />
-
 	</head>
 	<body>
 		<?php Render('header')?>

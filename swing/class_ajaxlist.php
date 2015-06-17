@@ -30,7 +30,7 @@
 	}
 	if($pageIndex<1) $pageIndex=1;
 	if($pageSize<1) $pageSize=20;
-	$pageIndex -= 1;
+	$pageIndex = ($pageIndex - 1) * $pageSize;
 	
 	$whereClause = array();
 	$whereParams = array();

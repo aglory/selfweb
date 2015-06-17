@@ -1,0 +1,53 @@
+
+.input{
+	width:80%;
+}
+.inputdom{
+	border-radius:5px;
+	width:80%;
+}
+
+.body  fieldset{
+	margin:10px 15px;
+	text-align:center;
+	border-style:none;
+}
+.body  fieldset legend{
+	font-weight:bolder;
+}
+
+.editortemplate{
+	width:100%;
+}
+
+.editortemplate #btSubmit{
+	width:200px;
+	line-height:60px;
+	font-size:32px;
+	border-radius:5px;
+}
+.editortemplate .inputdom{
+	line-height:37px;
+}
+.editortemplate #remark{
+	height:210px;
+}
+
+.editortemplate tr{
+	padding:3px auto;
+}
+
+.editortemplate  .label{
+	width:10%;
+	text-align:right;
+	font-weight:bolder;
+	vertical-align:middle;
+	
+}
+.editortemplate .input{
+	width:70%;
+	text-align:left;
+}
+.editortemplate .validate{
+	width:10%;
+}

@@ -59,10 +59,24 @@ a{
 #navclass{
 	background-image:url('/images/ad_07.png');
 }
-
 #navclass:hover{
 	background-image:url('/images/adr_07.png');
 }
+
+#navcategory{
+	background-image:url('/images/ad_09.png');
+}
+#navcategory:hover{
+	background-image:url('/images/adr_09.png');
+}
+
+#navjob{
+	background-image:url('/images/clocking01.png');
+}
+#navjob:hover{
+	background-image:url('/images/clocking02.png');
+}
+
 
 
 #editorForm table{
@@ -76,7 +90,15 @@ a{
 }
 
 
+.DialogStyle table .inputgroup label{
+	font-weight:normal;
+	font-size:100%;
+	color:inherit;
+}
 
-
+.table tbody .price{
+	text-align:right;
+	color:red;
+}
 
 

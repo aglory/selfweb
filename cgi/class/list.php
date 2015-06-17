@@ -10,7 +10,7 @@ function funLeveCount($item){
 	if($item['levecount'] <10 ){
 		return '<span>稀少</span><a class="apply" href="'.ActionLink('apply','class',array('schoolid' => $item['schoolid'],'classid' => $item['id']),false).'">抢名额</a>';
 	}
-	return '<span>少量</span><a class="apply" href="'.ActionLink('apply','class',array('schoolid' => $item['schoolid'],'classid' => $item['id']),false).'">挣名额</a>';
+	return '<span>少量</span><a class="apply" href="'.ActionLink('apply','class',array('schoolid' => $item['schoolid'],'classid' => $item['id']),false).'">争名额</a>';
 }
 
 ?>
@@ -26,7 +26,7 @@ function funLeveCount($item){
 		<div class="blockborder wrap body">
 			<?php
 				$sthschool = $pdomysql -> prepare("select * from tbSchoolInfo where guid = :guid;"); 
-				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by 'order' desc;");
+				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by `order` desc,id desc;");
 				
 				$guid = '';
 				if(array_key_exists('schoolid' , $_GET)){
@@ -42,13 +42,16 @@ function funLeveCount($item){
 				foreach($sthschool -> fetchAll(PDO::FETCH_ASSOC) as $school){
 					echo '<h1>',$school['name'],'</h1>';
 					$sthclass -> execute(array('id' => $school['id']));
+					
 					foreach($sthclass -> fetchAll(PDO::FETCH_ASSOC) as $class){
 						echo '<table class="class" id="class',$class['guid'],'"> ';
 						
-						echo '<tr><td class="colt name" colspan="2"><h3>',$class['name'],'</h3>';
+						echo '<tr><td class="colt name" colspan="2"><h3><span class="title">',$class['name'];
+						echo '</span>';
 						if(!empty($class['levecount'])){
-							echo '<a class="apply" href="',ActionLink('apply','class',array('schoolid' => $school['id'],'classid' => $class['id']),false),'">在线报名</a>';
+							echo '<a class="apply" href="',ActionLink('apply','apply',array('schoolid' => urlencode($school['guid']),'classid' => urlencode($class['guid'])),false),'">在线报名</a>';
 						}
+						echo '</h3>';
 						echo '</td></tr>';
 						
 						echo '<tr><td class="colt"><span>学时</span></td><td><span class="colv">';
@@ -74,7 +77,6 @@ function funLeveCount($item){
 								$diplomaafter[] = $item_value;
 							}
 						}
-						
 						if(!empty($diplomabefore)){
 							echo '<tr><td><span class="colt">学历要求</span></td><td class="colv">',implode('、',$diplomabefore),'</td></tr>';
 						}

@@ -9,40 +9,21 @@ $(function(){
 				$("#dialog").dialog({
 					//modal:true,
 					title:$(sender).attr('title'),
-					width:800,
-					height:720
+					width:400,
+					height:200
 				});
 				$("#editorForm").validate({
 					rules:{
 						name:{required:true}
 					},
 					messages:{
-						name:"请输入班级名称"
+						name:"请输入分类名称"
 					}
 				});
-				
-				var editorDescript = KindEditor.create('#description',{
-					width: 500,
-					
-					minWidth: 500,
-					height: 100,
-					minHeight: 100,
-					items:[
-						'source', 'undo', 'redo', 'template', 'code', 'cut', 'copy', 'paste',
-						'plainpaste', 'wordpaste', 'justifyleft', 'justifycenter', 'justifyright',
-						'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-						'superscript', 'clearhtml', 'quickformat', 'selectall',
-						'formatblock', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold',
-						'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', 
-						'image', 'multiimage', /*'flash', 'media',*/ 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-						'anchor', 'link', 'unlink','fullscreen'
-					],
-					uploadJson:"admin.php?model=upload&action=ajaxkindedior"
-				});
+
 				$("#editorForm button.submit").click(function(e){
 					var sender = this;
 					var frm = this.form;
-					editorDescript.sync();
 					if(!$(frm).valid())
 						return;
 					$(sender).attr('disabled','disabled');
@@ -52,7 +33,7 @@ $(function(){
 						dataType:'json',
 						data:$(frm).serialize(),
 						success:function(e){
-							if(!e)return;
+							if(!e) return;
 							if(!e.status){alert(e.message);return;}
 							$("#editorForm :input[name='id']").val(e.id);
 							$.sticky("保存成功", { type: "st-success" });
@@ -70,7 +51,7 @@ $(function(){
 	});
 	
 	$(".content").on("click","a.status",function(e){
-		if($(this).hasClass('status1') && !confirm('确定停止该班级')){
+		if($(this).hasClass('status1') && !confirm('确定停止该学校')){
 			return false;
 		}
 		var sender = this;

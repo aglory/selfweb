@@ -2,16 +2,17 @@
 	if(!defined('Execute') && !defined('Administartor')){ exit();}
 	function funRenderOperator($o){
 		$btn = array();
-		$btn[] = '<a class="btn editor" title="编辑" href="'.ActionLink('dialogeditor','school',array('id' => $o['id']),false).'">编辑</a>';
+		$btn[] = '<a class="btn editor" title="编辑" href="'.ActionLink('dialogeditor','category',array('id' => $o['id']),false).'">编辑</a>';
 		if($o['status']==1){
-			$btn[] = '<a class="btn status status1" href="'.ActionLink('ajaxchangestatus','school',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
+			$btn[] = '<a class="btn status status1" href="'.ActionLink('ajaxchangestatus','category',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
 		}else if($o['status'] == 2){
-			$btn[] = '<a class="btn status status2" href="'.ActionLink('ajaxchangestatus','school',array('id' => $o['id'],'status' => $o['status']),false).'">停用</a>';
+			$btn[] = '<a class="btn status status2" href="'.ActionLink('ajaxchangestatus','category',array('id' => $o['id'],'status' => $o['status']),false).'">停用</a>';
 		}
-		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','school',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
-		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','school',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
-		$btn[] = '<a class="btn class" href="'.ActionLink('list','class',array('schoolid' => $o['id']),false).'">课程</a>';
-		 
+		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','category',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
+		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','category',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
+		
+		$btn[] = '<a class="btn job" href="'.ActionLink('list','job',array('categoryid' => $o['id']),false).'">职位</a>';
+		
 		return implode('',$btn);
 	}
 
@@ -53,7 +54,7 @@
 	
 	$errors = array();
 	
-	$sthlist = $pdomysql -> prepare("select * from tbSchoolInfo $whereClause $orderBy limit $pageIndex,$pageSize;");
+	$sthlist = $pdomysql -> prepare("select * from tbCategoryInfo $whereClause $orderBy limit $pageIndex,$pageSize;");
 	
 	$sthlist -> execute();
 	$value = Array();
@@ -72,7 +73,7 @@
 		$value = implode('',$value);
 	}
 	
-	$sthcount = $pdomysql -> prepare("select count(1) from tbSchoolInfo $whereClause");
+	$sthcount = $pdomysql -> prepare("select count(1) from tbCategoryInfo $whereClause");
 	$sthcount -> execute();
 	
 	$errorcount = $sthcount -> errorInfo();

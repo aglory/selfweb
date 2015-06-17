@@ -13,27 +13,44 @@ table.class{
 table.class .name{
 	background:url('/image/boxcontrol.jpg') repeat-x top center;
 }
-table.class .name .title{
-	float:left;
-	display:block;
+table.class .name h3{
 }
 table.class .name .apply{
 	float:right;
-	display:block
-	width:200px;
-	height:60px;
-	color:red;
+	display:block;
+	line-height:62px;
+	margin-right:5px;
+	display:none;
 }
 table.class .name .apply:after{
 clear:both;
 display:block;
 content:
 }
-.class td.colt{
+table.class .price{
 	width:20%;
+	text-align:right;
 }
-.class td.colv{
-	width:80%;
+table.class .method{
+	width:20%;
+	text-align:center;
+}
+.search{
+	width:916px;
+	margin-bottom:10px;
 }
 
+.coltitle{
+	width:10%;
+}
+.colvalue{
+	width:90%;
+	text-align:left;
+}
+.colvalue a{
+	margin:5px;
+}
 
+.search a.active{
+	color:red;
+}
