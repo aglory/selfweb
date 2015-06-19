@@ -1,5 +1,7 @@
 <?php
 	ob_start();
+	define ('CLIENTID','ClientId');
+	
 	function ActionLink($action='',$model='',$opts=null,$echo=true){
 		$result = array();
 		$result[] = 'model='.urlencode($model);
@@ -52,6 +54,26 @@
 	require "cgi/pdo.php";
 	
 	$TemplateManagerList = !preg_match('/(^ajax)|(^dialog)/',$action);
+	
+	
+	if(!array_key_exists(CLIENTID,$_COOKIE)){
+		if($model!='session'){
+			header('location: '.ActionLink('login','session',null,false));
+			exit();
+		}
+		require './swing/'.$model.'_'.$action.'.php';
+		exit();
+	}
+	
+	$ClientId = $_COOKIE[CLIENTID];
+	$pdomysql -> query('delete from tbSessionIfo where datemodify<date_add(now(),interval -1 hour);') -> execute();
+	$sth = $pdomysql -> prepare('update tbSessionIfo set datemodify=now() where clientid=:clientid and ip=:ip and datemodify<date_add(now(),interval -1 hour);');
+	$sth -> execute(array('clientid' => $ClientId,'ip' => $_SERVER["REMOTE_ADDR"]));
+	if(empty($sth -> rowCount())){
+		header('location: '.ActionLink('login','session',null,false));
+		exit();
+	}
+	$CurrentUserId='';
 	
 	if($TemplateManagerList){
 		require "admintemp.php";
