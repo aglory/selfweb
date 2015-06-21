@@ -83,7 +83,7 @@
 	$methods = array('0' => '','1' => '直签','2' => '派遣','4' => '先派遣后直签');
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
-		$value[] = '<tr><td>'.htmlspecialchars($item['name']).'</td><td>'.$item['categoryname'].'</td><td class="price">'.$item['serviceprice'].'</td>'.$item['method'].'<td>'.$methods[$item['method']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$value[] = '<tr><td>'.htmlspecialchars($item['name']).'</td><td>'.$item['categoryname'].'</td><td class="price">'.$item['serviceprice'].'</td>'.'<td>'.$methods[$item['method']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';
