@@ -10,6 +10,7 @@
 		}
 		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','category',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
 		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','category',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
+		$btn[] = '<a class="btn moveinput" href="'.ActionLink('dialogchangeordereditor','category',array('id' => $o['id']),false).'">排序</a>';
 		
 		$btn[] = '<a class="btn job" href="'.ActionLink('list','job',array('categoryid' => $o['id']),false).'">职位</a>';
 		

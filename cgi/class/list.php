@@ -85,7 +85,7 @@ function funLeveCount($item){
 							echo '<tr><td><span class="colt">毕业文凭</span></td><td class="colv">',implode('、',$diplomaafter),'</td></tr>';
 						}
 						
-						echo '<tr><td class="colt">学费</td><td class="colv">';
+						echo '<tr><td class="colt">费用</td><td class="colv">';
 						if($class['price']> 0){
 							echo $class['price'];
 						}else{
@@ -99,7 +99,7 @@ function funLeveCount($item){
 						}
 						
 						if(!empty(strip_tags($class['description']))){
-							echo "<tr><td class='colt description'>简介</td><td class='colv'>{$class['description']}</td></tr>";
+							echo "<tr><td colspan='2'>{$class['description']}</td></tr>";
 						}
 						
 						

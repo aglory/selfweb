@@ -10,6 +10,7 @@
 		}
 		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','class',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
 		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','class',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
+		$btn[] = '<a class="btn moveinput" href="'.ActionLink('dialogchangeordereditor','class',array('id' => $o['id']),false).'">排序</a>';
 		 
 		return implode('',$btn);
 	}

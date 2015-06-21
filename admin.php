@@ -55,6 +55,7 @@
 	
 	$TemplateManagerList = !preg_match('/(^ajax)|(^dialog)/',$action);
 	
+	/*
 	
 	if(!array_key_exists(CLIENTID,$_COOKIE)){
 		if($model!='session'){
@@ -74,6 +75,9 @@
 		exit();
 	}
 	$CurrentUserId='';
+	
+	
+	*/
 	
 	if($TemplateManagerList){
 		require "admintemp.php";

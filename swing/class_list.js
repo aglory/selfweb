@@ -101,5 +101,53 @@ $(function(){
 		return false;
 	});
 	
+	$(".content").on("click","a.moveinput",function(e){
+		var sender = this;
+		$.ajax({
+			url:sender.href,
+			cache:false,
+			success:function(html){
+				$("#dialog").html(html);
+				$("#dialog").dialog({
+					//modal:true,
+					title:$(sender).attr('title'),
+					width:400,
+					height:200
+				});
+				$("#editorForm").validate({
+					rules:{
+						order:{required:true,number:true}
+					},
+					messages:{
+						order:{required:"请正确输入排序数字",number:"请正确输入排序数字"}
+					}
+				});
+
+				$("#editorForm button.submit").click(function(e){
+					var sender = this;
+					var frm = this.form;
+					if(!$(frm).valid())
+						return;
+					$(sender).attr('disabled','disabled');
+					$.ajax({
+						url:frm.action,
+						method:frm.method,
+						dataType:'json',
+						data:$(frm).serialize(),
+						success:function(e){
+							if(!e) return;
+							if(!e.status){alert(e.message);return;}
+							$("#dialog").dialog("close");
+							query();
+						},
+						complete:function(e){
+							$(sender).removeAttr('disabled');
+						}
+					});
+				});
+			}
+		});
+		return false;
+	});
 	
 });
