@@ -4,20 +4,26 @@
 	if(array_key_exists('classid',$_GET)){
 		$classid = intval($_GET['classid']);
 	}
+	$keyid = 0;
+	if(array_key_exists('keyid',$_GET)){
+		$keyid = intval($_GET['keyid']);
+	}
+	
 ?>
 <article class="container_12">
     <section class="grid_12">
         <div class="block-border">
-            <form action="<?php ActionLink('ajaxlist','classproperty')?>" method="post" id="mainForm" class="block-content form">
+            <form action="<?php ActionLink('ajaxlist','classpropertyvalue')?>" method="post" id="mainForm" class="block-content form">
 				<input type="hidden" id="pageIndex" name="pageIndex" value="1" />
 				<input type="hidden" id="pageSize" name="pageSize" value="20" />
 				<input type="hidden" id="orderBy" name="orderBy" value="" />
 				<input type="hidden" id="classid" name="classid" value="<?php echo $classid ?>" />
+				<input type="hidden" id="keyid" name="keyid" value="<?php echo $keyid ?>" />
                 <h1>属性管理</h1>	
 		        <div class="block-controls">
-				    <div class="AddLink"><a class="editor" href="<?php ActionLink('dialogeditor','classproperty',array('id' => 0,'classid' => $classid))?>" title="新增属性"><span></span><q>新增属性</q></a></div>
+				    <div class="AddLink"><a class="editor" href="<?php ActionLink('dialogeditor','classpropertyvalue',array('id' => 0,'classid' => $classid,'keyid' => $keyid))?>" title="新增属性"><span></span><q>新增属性</q></a></div>
 			        <ul class="controls-buttons">
-				        <li><input id="name" name="name" type="text" placeholder="输入属性名称查询" /></li>
+				        <li><input id="value" name="value" type="text" placeholder="输入属性值称查询" /></li>
 						<li>重要程度<select name="targetlevel">
 							<option value="0">全部</option>
 							<option value="1">normal</option>
@@ -26,9 +32,6 @@
 							<option value="4">warn</option>
 							<option value="5">error</option>
 						</select></li>
-						<li>
-							展示方式<select name="displaytype"><option value="0">全部</option><option value="1">默认</option><option value="2">无序</option><option value="3">有序</option></select>
-						</li>
 						<li>状态<select name="status"><option value="0">全部</option><option value="1">启用</option><option value="2">停用</option></select></li>
 				        <li><a class="btn" id="btnSeacher" title="搜索">搜索<img src="/images/icons/fugue/navigation.png" width="16" height="16"></a></li>
 				        <li class="sep"></li>
@@ -40,11 +43,7 @@
                     <thead>
                         <tr class="mainTable-head">
                             <th scope="col">
-                                <span class="column-sort">
-						            <a class="sort-up"></a>
-						            <a class="sort-down"></a>
-					            </span>
-                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="name">属性名称</a>
+								属性值
                             </th>
 							<th scope="col">
                                 <span class="column-sort">
@@ -52,13 +51,6 @@
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="targetlevel">重要程度</a>
-							</th>
-							<th scope="col">
-                                <span class="column-sort">
-						            <a class="sort-up"></a>
-						            <a class="sort-down"></a>
-					            </span>
-                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="displaytype">展示方式</a>
 							</th>
                             <th scope="col">
                                 <span class="column-sort">

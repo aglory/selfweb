@@ -27,6 +27,9 @@ function funLeveCount($item){
 			<?php
 				$sthschool = $pdomysql -> prepare("select * from tbSchoolInfo where guid = :guid;"); 
 				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by `order` desc,id desc;");
+				$sthpropertykey = $pdomysql -> prepare("select * from tbClassPropertyKeyInfo where classid = :classid and status = 1 order by `order` desc;"); 
+				$sthpropertyvalue = $pdomysql -> prepare("select * from tbClassPropertyValueInfo where classid = :classid and keyid = :keyid and status = 1 order by `order` desc;"); 
+				
 				
 				$guid = '';
 				if(array_key_exists('schoolid' , $_GET)){
@@ -98,6 +101,40 @@ function funLeveCount($item){
 							echo '<tr><td class="colt">剩余名额</td><td class="colv">',funLeveCount($class),'</td></tr>';
 						}
 						
+						$sthpropertykey -> execute(array('classid' => $class['id']));
+						if($sthpropertykey -> rowCount()>0){
+							echo '<tr><td colspan="2"><dl class="dl">';
+							foreach($sthpropertykey -> fetchAll(PDO::FETCH_ASSOC) as $propertykey){
+								echo '<dt class="dt targetlevel',$propertykey['targetlevel'],'">',$propertykey['name'],'</dt>';
+								$sthpropertyvalue -> execute(array('classid' => $class['id'],'keyid' => $propertykey['id']));
+								if($sthpropertyvalue -> rowCount() > 0){
+									switch($propertykey['displaytype']){
+										case '1':
+											foreach($sthpropertyvalue -> fetchAll(PDO::FETCH_ASSOC) as $propertyvalue){
+												echo '<dd class="dd targetlevel',$propertyvalue['targetlevel'],'">',$propertyvalue['value'],'</dd>';
+											}
+											break;
+										case '2':
+											echo '<dd class="dd targetlevel',$propertykey['targetlevel'],'"><ul class="ul">';
+											foreach($sthpropertyvalue -> fetchAll(PDO::FETCH_ASSOC) as $propertyvalue){
+												echo '<li class="li">',$propertyvalue['value'],'</li>';
+											}
+											echo '</ul></dd>';
+											break;
+										case '3':
+											echo '<dd class="dd targetlevel',$propertykey['targetlevel'],'"><ol class="ol">';
+											foreach($sthpropertyvalue -> fetchAll(PDO::FETCH_ASSOC) as $propertyvalue){
+												echo '<li class="li">',$propertyvalue['value'],'</li>';
+											}
+											echo '</ol></dd>';
+											break;
+									}
+									echo '<dd>';
+									echo '</dd>';
+								}
+							}
+							echo '</dl></td></tr>';
+						}
 						if(!empty(strip_tags($class['description']))){
 							echo "<tr><td colspan='2'>{$class['description']}</td></tr>";
 						}

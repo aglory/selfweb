@@ -40,13 +40,18 @@ content:
 	border:1px solid #e2e2e2;
 	word-break:break-all;
 }
-.class td .ul li,.class td .ol li{
+.class td .ul li, .class td .ol li{
 	white-space:normal;
 	overflow:visible;
-	list-style-type:initial;
 	margin-left:30px;
 	color:#64451D;
 	word-break:break-all;
+}
+.class td .ol li{
+	list-style-type:decimal;
+}
+.class td .ul li{
+	list-style-type:disc;
 }
 .class .t_l:{
 	text-align:left;
@@ -60,3 +65,18 @@ content:
 .class .v_t{
 	vertical-align:top;
 }
+.class .dl .targetlevel1{
+}
+.class .dl .targetlevel2{
+	color:blue;
+}
+.class .dl .targetlevel3{
+}
+.class .dl .targetlevel4{
+	color:yellow;
+}
+.class .dl .targetlevel5{
+	color:red;
+}
+
+
