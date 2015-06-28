@@ -8,14 +8,14 @@
 <article class="container_12">
     <section class="grid_12">
         <div class="block-border">
-            <form action="<?php ActionLink('ajaxlist','classproperty')?>" method="post" id="mainForm" class="block-content form">
+            <form action="<?php ActionLink('ajaxkeylist','classproperty')?>" method="post" id="mainForm" class="block-content form">
 				<input type="hidden" id="pageIndex" name="pageIndex" value="1" />
 				<input type="hidden" id="pageSize" name="pageSize" value="20" />
 				<input type="hidden" id="orderBy" name="orderBy" value="" />
 				<input type="hidden" id="classid" name="classid" value="<?php echo $classid ?>" />
                 <h1>属性管理</h1>	
 		        <div class="block-controls">
-				    <div class="AddLink"><a class="editor" href="<?php ActionLink('dialogeditor','classproperty',array('id' => 0,'classid' => $classid))?>" title="新增属性"><span></span><q>新增属性</q></a></div>
+				    <div class="AddLink"><a class="keyeditor" href="<?php ActionLink('dialogkeyeditor','classproperty',array('id' => 0,'classid' => $classid))?>" title="新增属性"><span></span><q>新增属性</q></a></div>
 			        <ul class="controls-buttons">
 				        <li><input id="name" name="name" type="text" placeholder="输入属性名称查询" /></li>
 						<li>重要程度<select name="targetlevel">

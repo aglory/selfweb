@@ -1,5 +1,5 @@
 $(function(){
-	$("#mainForm").on("click","a.editor",function(e){
+	$("#mainForm").on("click","a.keyeditor",function(e){
 		var sender = this;
 		$.ajax({
 			url:sender.href,
@@ -19,7 +19,7 @@ $(function(){
 						displaytype:{min:1}
 					},
 					messages:{
-						name:{required:"请输职位名称"},
+						name:{required:"请输属性名称"},
 						targetlevel:{min:"请选择重要程度"},
 						displaytype:{min:"请选择展示方式"}
 					}
@@ -54,7 +54,7 @@ $(function(){
 		return false;
 	});
 	
-	$(".content").on("click","a.status",function(e){
+	$(".content").on("click","a.keystatus",function(e){
 		if($(this).hasClass('status1') && !confirm('确定停止该职位')){
 			return false;
 		}
@@ -72,7 +72,7 @@ $(function(){
 	});
 	
 	
-	$(".content").on("click","a.move",function(e){
+	$(".content").on("click","a.keymove",function(e){
 		var sender = this;
 		$.ajax({
 			url:sender.href,
@@ -86,7 +86,7 @@ $(function(){
 		return false;
 	});
 	
-	$(".content").on("click","a.moveinput",function(e){
+	$(".content").on("click","a.keymoveinput",function(e){
 		var sender = this;
 		$.ajax({
 			url:sender.href,
@@ -130,6 +130,30 @@ $(function(){
 						}
 					});
 				});
+			}
+		});
+		return false;
+	});
+	
+	
+	
+	
+	
+	$("#mainForm").on('click','.keyvalue',function(e){
+		var sender = this;
+		$(".content").mask("loading");
+		$.ajax({
+			url:sender.href,
+			cache:false,
+			success:function(e){
+				if(!e)return;
+				if(!e.status){alert(e.message);return;}
+				$(".tr_propertykey_"+sender.rel+"_value").remove();
+				$(".tr_property_key_"+sender.rel).after(e.value);
+			}
+			,complete:function(e){
+				$(".content").unmask("loading");
+			},error:function(e){
 			}
 		});
 		return false;
