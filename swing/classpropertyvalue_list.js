@@ -18,7 +18,7 @@ $(function(){
 						targetlevel:{min:1}
 					},
 					messages:{
-						name:{required:"请输职位名称"},
+						name:{required:"请输属性值"},
 						targetlevel:{min:"请选择重要程度"}
 					}
 				});
