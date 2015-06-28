@@ -90,7 +90,11 @@
 	$targetlevels = array('0' => '','1' => 'normal','2' => 'primary','3' => 'info','4' => 'warn','5' => 'error');
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
-		$value[] = '<tr><td>'.htmlspecialchars($item['value']).'</td><td>'.$targetlevels[$item['targetlevel']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$item_value = $item['value'];
+		if(strlen($item_value) > 20){
+			$item_value = substr($item_value,0,18).'..';
+		}
+		$value[] = '<tr><td title="'.$item['value'].'">'.$item_value.'</td><td>'.$targetlevels[$item['targetlevel']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';
