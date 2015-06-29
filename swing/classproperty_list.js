@@ -1,4 +1,8 @@
 $(function(){
+	window.ajaxSuccess=function(e){
+		$("#divFormGroup").html(e.form);
+	}
+	
 	$("#mainForm").on("click","a.keyeditor",function(e){
 		var sender = this;
 		$.ajax({
@@ -136,28 +140,43 @@ $(function(){
 	});
 	
 	
-	
-	
-	
-	$("#mainForm").on('click','.keyvalue',function(e){
-		var sender = this;
-		$(".content").mask("loading");
+		
+	function groupQuery(keyid){
+		var formId="#groupform"+keyid;
+		if($(formId).length==0){
+			return;
+		}		
+		$("#tr_property_key_"+keyid).mask("loading");
 		$.ajax({
-			url:sender.href,
-			cache:false,
+			url:$(formId).attr('action'),
+			type:$(formId).attr('method'),
+			data:$(formId).serialize(),
+			dataType:"json",
 			success:function(e){
 				if(!e)return;
 				if(!e.status){alert(e.message);return;}
-				$(".tr_propertykey_"+sender.rel+"_value").remove();
-				$(".tr_property_key_"+sender.rel).after(e.value);
-			}
-			,complete:function(e){
-				$(".content").unmask("loading");
-			},error:function(e){
+				var pageIndex = parseInt($(formId+" input[name='pageIndex']").val());
+				var pageSize = parseInt($(formId+" input[name='pageSize']").val());
+				$(".tr_property_key_"+keyid+"_value").remove();
+				$("#tr_property_key_"+keyid).after(e.value);
+				$("#pager").pager({pageIndex:pageIndex, pageSize:pageSize, recordCount:e.recordCount, pageIndexChanged:function(e){
+					$(formId+" input[name='pageIndex']").val(e);
+					groupQuery(keyid);
+				}});
+			},complete:function(){
+				$("#tr_property_key_"+keyid).unmask();
 			}
 		});
+	}
+
+	
+	$("#mainForm").on('click','.keyvalue',function(e){
+		groupQuery(this.rel);
 		return false;
 	});
 	
+	$("#mainForm").on('click','.valueeditor',function(e){
+		
+	});
 	
 });

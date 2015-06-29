@@ -2,17 +2,17 @@
 	if(!defined('Execute') && !defined('Administartor')){ exit();}
 	function funRenderOperator($o){
 		$btn = array();
-		$btn[] = '<a class="btn editor" title="编辑" href="'.ActionLink('dialogeditor','classproperty',array('id' => $o['id']),false).'">编辑</a>';
+		$btn[] = '<a class="btn keyeditor" title="编辑" href="'.ActionLink('dialogkeyeditor','classproperty',array('id' => $o['id']),false).'">编辑</a>';
 		if($o['status']==1){
-			$btn[] = '<a class="btn status status1" href="'.ActionLink('ajaxchangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
+			$btn[] = '<a class="btn keystatus status1" href="'.ActionLink('ajaxkeychangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
 		}else if($o['status'] == 2){
-			$btn[] = '<a class="btn status status2" href="'.ActionLink('ajaxchangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">停用</a>';
+			$btn[] = '<a class="btn keystatus status2" href="'.ActionLink('ajaxkeychangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">停用</a>';
 		}
-		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
-		$btn[] = '<a class="btn move" href="'.ActionLink('ajaxchangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
-		$btn[] = '<a class="btn moveinput" title="排序" href="'.ActionLink('dialogchangeordereditor','classproperty',array('id' => $o['id']),false).'">排序</a>';
+		$btn[] = '<a class="btn keymove" href="'.ActionLink('ajaxkeychangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
+		$btn[] = '<a class="btn keymove" href="'.ActionLink('ajaxkeychangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
+		$btn[] = '<a class="btn keymoveinput" title="排序" href="'.ActionLink('dialogkeychangeordereditor','classproperty',array('id' => $o['id']),false).'">排序</a>';
 
-		$btn[] = '<a class="btn" href="'.ActionLink('list','classpropertyvalue',array('keyid' => $o['id'],'classid' => $o['classid']),false).'">键值</a>';
+		$btn[] = '<a class="btn keyvalue" rel="'.$o['id'].'" href="'.ActionLink('ajaxvaluelist','classproperty',array('propertyid' => $o['id']),false).'">键值</a>';
 		return implode('',$btn);
 	}
 
@@ -82,6 +82,7 @@
 	
 	$sthlist -> execute();
 	$value = Array();
+	$form = Array();
 	
 	$errorlist = $sthlist -> errorInfo();
 	if($errorlist[0] > 0){
@@ -93,7 +94,12 @@
 	$targetlevels = array('0' => '','1' => 'normal','2' => 'primary','3' => 'info','4' => 'warn','5' => 'error');
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
-		$value[] = '<tr><td>'.htmlspecialchars($item['name']).'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$item_name = strip_tags($item['name']);
+		if(strlen($item_name) > 20){
+			$item_name = substr($item_name,0,18).'..';
+		}
+		$value[] = '<tr id="tr_property_key_'.$item['id'].'"><td title="'.$item['name'].'">'.$item_name.'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="1000" /><input type="hidden" name="orderBy" value="" /></form>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';
@@ -113,6 +119,7 @@
 	$result['recordCount'] = intval($sthcount->fetch()[0]);
 	$result['status'] = count($errors) == 0 ? true :false;
 	$result['value'] = $value;
+	$result['form'] = implode('',$form);
 	$result['message'] = implode('\r\n',$errors);
 	
 	echo json_encode($result ,true);

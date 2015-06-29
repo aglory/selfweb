@@ -8,6 +8,7 @@
 <article class="container_12">
     <section class="grid_12">
         <div class="block-border">
+			<div id="divFormGroup" style="display:none;"></div>
             <form action="<?php ActionLink('ajaxkeylist','classproperty')?>" method="post" id="mainForm" class="block-content form">
 				<input type="hidden" id="pageIndex" name="pageIndex" value="1" />
 				<input type="hidden" id="pageSize" name="pageSize" value="20" />

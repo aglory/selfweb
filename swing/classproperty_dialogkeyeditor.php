@@ -27,7 +27,7 @@
 ?>
 
 <div class="form DialogStyle">
-	<form action="<?php ActionLink('ajaxsave','classproperty')?>" method="post" id="editorForm" class="block-content form">
+	<form action="<?php ActionLink('ajaxkeysave','classproperty')?>" method="post" id="editorForm" class="block-content form">
 		<input name="id" type="hidden" value="<?php echo $id; ?>" />
 		<input name="classid" type="hidden" value="<?php echo $classid; ?>" />
 		<table style="width:100%">

@@ -17,7 +17,7 @@
 ?>
 
 <div class="form DialogStyle">
-	<form action="<?php ActionLink('ajaxchangeorder','classproperty')?>" method="get" id="editorForm" class="block-content form">
+	<form action="<?php ActionLink('ajaxkeychangeorder','classproperty')?>" method="get" id="editorForm" class="block-content form">
 		<input name="id" type="hidden" value="<?php echo $id; ?>" />
 		<table style="width:100%">
 			<tr>

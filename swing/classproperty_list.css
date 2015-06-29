@@ -1,10 +1,40 @@
-.status1{
+
+
+.status1:hover,
+.status2:hover{
+	color:default;
+}
+
+.table tbody .tr_property_key:nth-child(even) td{
+	background:#9a9a9a;
+}
+.table tbody .tr_property_key:nth-child(odd) td{
+	background:#a1a1a1;
+}
+.table tbody .tr_property_key:hover td{
+	background:#b2b2b2;
+}
+
+.tr_property_key .btn{
+	color:#f1f1f1;
+} 
+.tr_property_key .btn:hover{
+	color:red;
+}
+.tr_property_key  th .btn{
 	color:green;
 }
-.status2{
+
+.status1,.tr_property_key .status1{
+	color:green;
+}
+.status2,.tr_property_key .status2{
 	color:red;
 }
 
-.status1:hover,.status2:hover{
-	color:default;
+
+.ChildAddLink a:hover{
+	border-radius:5px;
+	background-color:blue;
+	padding:5px;
 }
