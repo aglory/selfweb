@@ -43,7 +43,6 @@
 	
 	$whereClause = array();
 	$whereParams = array();
-	
 	$propertyid = 0;
 	if(array_key_exists('propertyid',$_REQUEST)){
 		$propertyid = intval($_REQUEST['propertyid']);
@@ -95,14 +94,13 @@
 		$errors[] = $errorlist[2];
 	}
 	
-	
 	$targetlevels = array('0' => '','1' => 'normal','2' => 'primary','3' => 'info','4' => 'warn','5' => 'error');
 	
 	$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><th>属性值</th><th>重要程度</th><th></th><th>顺序</th><th><span class="ChildAddLink">'.funRenderEditorBtn(Array('id' => 0,'keyid' => $propertyid)).'</span></th></tr>';
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
 		$item_value = strip_tags($item['value']);
-		if(strlen($item_value) > 60){
-			$item_value = substr($item_value,0,58).'..';
+		if(mb_strlen($item_value,'utf-8') > 60){
+			$item_value = mb_substr($item_value,0,58,'utf-8').'..';
 		}
 		$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><td title="'.strip_tags($item['value']).'">'.$item_value.'</td><td>'.$targetlevels[$item['targetlevel']].'</td><td>-</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
 	}

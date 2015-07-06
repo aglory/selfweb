@@ -73,7 +73,6 @@
 	}else{
 		$orderBy = 'order by '.$orderBy;
 	}
-	
 	$errors = array();
 	
 	$sthlist = $pdomysql -> prepare("select * from tbClassPropertyValueInfo $whereClause $orderBy limit $pageIndex,$pageSize;");

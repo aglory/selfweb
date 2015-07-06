@@ -14,8 +14,7 @@
 
 		$btn[] = '<a class="btn keyvalue" rel="'.$o['id'].'" href="'.ActionLink('ajaxvaluelist','classproperty',array('propertyid' => $o['id']),false).'">键值</a>';
 		
-		$btn[] = '<a class="btn" rel="'.$o['id'].'" href="'.ActionLink('list','classpropertyvalue',array('propertyid' => $o['id']),false).'">键值详情</a>';
-		$btn[] = '_list';
+		$btn[] = '<a class="btn" rel="'.$o['id'].'" href="'.ActionLink('list','classpropertyvalue',array('keyid' => $o['id']),false).'">键值详情</a>';
 		return implode('',$btn);
 	}
 
@@ -98,8 +97,8 @@
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
 		$item_name = strip_tags($item['name']);
-		if(strlen($item_name) > 60){
-			$item_name = substr($item_name,0,58).'..';
+		if(mb_strlen($item_name,'utf-8') > 60){
+			$item_name = mb_substr($item_name,0,58,'utf-8').'..';
 		}
 		$value[] = '<tr id="tr_property_key_'.$item['id'].'"><td title="'.strip_tags($item['name']).'">'.$item_name.'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
 		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="2" /><input type="hidden" name="orderBy" value="" /></form>';
