@@ -13,6 +13,9 @@
 		$btn[] = '<a class="btn keymoveinput" title="排序" href="'.ActionLink('dialogkeychangeordereditor','classproperty',array('id' => $o['id']),false).'">排序</a>';
 
 		$btn[] = '<a class="btn keyvalue" rel="'.$o['id'].'" href="'.ActionLink('ajaxvaluelist','classproperty',array('propertyid' => $o['id']),false).'">键值</a>';
+		
+		$btn[] = '<a class="btn" rel="'.$o['id'].'" href="'.ActionLink('list','classpropertyvalue',array('propertyid' => $o['id']),false).'">键值详情</a>';
+		$btn[] = '_list';
 		return implode('',$btn);
 	}
 
