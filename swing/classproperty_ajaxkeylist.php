@@ -95,11 +95,11 @@
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
 		$item_name = strip_tags($item['name']);
-		if(strlen($item_name) > 20){
-			$item_name = substr($item_name,0,18).'..';
+		if(strlen($item_name) > 60){
+			$item_name = substr($item_name,0,58).'..';
 		}
-		$value[] = '<tr id="tr_property_key_'.$item['id'].'"><td title="'.$item['name'].'">'.$item_name.'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
-		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="1000" /><input type="hidden" name="orderBy" value="" /></form>';
+		$value[] = '<tr id="tr_property_key_'.$item['id'].'"><td title="'.strip_tags($item['name']).'">'.$item_name.'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="2" /><input type="hidden" name="orderBy" value="" /></form>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';

@@ -4,13 +4,13 @@
 		$btn = array();
 		$btn[] = funRenderEditorBtn($o);
 		if($o['status']==1){
-			$btn[] = '<a class="btn valuestatus status1" href="'.ActionLink('ajaxchangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
+			$btn[] = '<a rel="'.$o['keyid'].'" class="btn valuestatus status1" href="'.ActionLink('ajaxvaluechangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">运行</a>';
 		}else if($o['status'] == 2){
-			$btn[] = '<a class="btn valuestatus status2" href="'.ActionLink('ajaxchangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">停用</a>';
+			$btn[] = '<a rel="'.$o['keyid'].'" class="btn valuestatus status2" href="'.ActionLink('ajaxvaluechangestatus','classproperty',array('id' => $o['id'],'status' => $o['status']),false).'">停用</a>';
 		}
-		$btn[] = '<a class="btn valuemove" href="'.ActionLink('ajaxchangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
-		$btn[] = '<a class="btn valuemove" href="'.ActionLink('ajaxchangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
-		$btn[] = '<a class="btn valuemoveinput" title="排序" href="'.ActionLink('dialogchangeordereditor','classproperty',array('id' => $o['id']),false).'">排序</a>';
+		$btn[] = '<a rel="'.$o['keyid'].'" class="btn valuemove" href="'.ActionLink('ajaxvaluechangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']+1),false).'">↑</a>';
+		$btn[] = '<a rel="'.$o['keyid'].'" class="btn valuemove" href="'.ActionLink('ajaxvaluechangeorder','classproperty',array('id' => $o['id'],'order' => $o['order']-1),false).'">↓</a>';
+		$btn[] = '<a rel="'.$o['keyid'].'" class="btn valuemoveinput" title="排序" href="'.ActionLink('dialogvaluechangeordereditor','classproperty',array('id' => $o['id']),false).'">排序</a>';
 
 		return implode('',$btn);
 	}
@@ -20,7 +20,7 @@
 		if(empty($o['id'])){
 			$name = '新增属性值';
 		}
-		return '<a class="btn valueeditor" title="'.$name.'" href="'.ActionLink('dialogvalueeditor','classproperty',array('id' => $o['id']),false).'">'.$name.'</a>';;
+		return '<a rel="'.$o['keyid'].'" class="btn valueeditor" title="'.$name.'" href="'.ActionLink('dialogvalueeditor','classproperty',array('id' => $o['id']),false).'">'.$name.'</a>';;
 	}
 
 	header('Content-Type: application/json');	
@@ -98,13 +98,13 @@
 	
 	$targetlevels = array('0' => '','1' => 'normal','2' => 'primary','3' => 'info','4' => 'warn','5' => 'error');
 	
-	$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><th>属性值</th><th>重要程度</th><th></th><th>顺序</th><th><span class="ChildAddLink">'.funRenderEditorBtn(Array('id' => 0)).'</span></th></tr>';
+	$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><th>属性值</th><th>重要程度</th><th></th><th>顺序</th><th><span class="ChildAddLink">'.funRenderEditorBtn(Array('id' => 0,'keyid' => $propertyid)).'</span></th></tr>';
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
-		$item_value = $item['value'];
-		if(strlen($item_value) > 20){
-			$item_value = substr($item_value,0,18).'..';
+		$item_value = strip_tags($item['value']);
+		if(strlen($item_value) > 60){
+			$item_value = substr($item_value,0,58).'..';
 		}
-		$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><td title="'.$item['value'].'">'.$item_value.'</td><td>'.$targetlevels[$item['targetlevel']].'</td><td>-</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><td title="'.strip_tags($item['value']).'">'.$item_value.'</td><td>'.$targetlevels[$item['targetlevel']].'</td><td>-</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
 	}
 	if(empty($value)){
 		$value = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><td colspan="5">暂无数据</td></tr>';
@@ -112,9 +112,10 @@
 		$value = implode('',$value);
 	}
 	
-	$sthcount = $pdomysql -> prepare("select count(1) from tbClassPropertyValueInfo $whereClause");
-	$sthcount -> execute();
+	$value .= '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><td id="tr_property_key_'.$propertyid.'_pager" class="pager" colspan="5"></td></tr>';
 	
+	$sthcount = $pdomysql -> prepare("select count(1) from tbClassPropertyValueInfo $whereClause");
+	$sthcount -> execute();	
 	$errorcount = $sthcount -> errorInfo();
 	if($errorcount[0] > 0){
 		$errors[] = $errorlist[2];

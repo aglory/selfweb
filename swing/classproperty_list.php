@@ -47,28 +47,28 @@
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="name">属性名称</a>
                             </th>
-							<th scope="col">
+							<th scope="col" style="width:80px;">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="targetlevel">重要程度</a>
 							</th>
-							<th scope="col">
+							<th scope="col" style="width:80px;">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="displaytype">展示方式</a>
 							</th>
-                            <th scope="col">
+                            <th scope="col" style="width:80px;">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="`order`">顺序</a>
                             </th>
-                            <th scope="col" class="table-actions">操作</th>
+                            <th scope="col" class="table-actions" style="width:180px">操作</th>
                         </tr>
                         </thead>
                         <tbody class="content">

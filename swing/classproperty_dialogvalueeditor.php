@@ -28,9 +28,8 @@
 		}
 	}
 ?>
-
 <div class="form DialogStyle">
-	<form action="<?php ActionLink('ajaxvaluesave','classpropertyvalue')?>" method="post" id="editorForm" class="block-content form">
+	<form action="<?php ActionLink('ajaxvaluesave','classproperty')?>" method="post" id="editorForm" class="block-content form">
 		<input name="id" type="hidden" value="<?php echo $id; ?>" />
 		<input name="keyid" type="hidden" value="<?php echo $keyid; ?>" />
 		<input name="classid" type="hidden" value="<?php echo $classid; ?>" />

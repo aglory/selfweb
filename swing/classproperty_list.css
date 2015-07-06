@@ -38,3 +38,9 @@
 	background-color:blue;
 	padding:5px;
 }
+.tr_property_key .pages{
+	text-align:right;
+}
+.tr_property_key .pages li{
+	display:inline;
+}
