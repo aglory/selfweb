@@ -3,8 +3,8 @@
 	$id = 0;
 	$name = '';
 	$classid = 0;
-	$targetlevel = 0;
-	$displaytype = 0;
+	$targetlevel = 1;
+	$displaytype = 1;
 	
 	if(array_key_exists('id',$_REQUEST)){
 		$id = intval($_REQUEST['id']);

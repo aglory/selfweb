@@ -101,7 +101,7 @@
 			$item_name = mb_substr($item_name,0,58,'utf-8').'..';
 		}
 		$value[] = '<tr id="tr_property_key_'.$item['id'].'"><td title="'.strip_tags($item['name']).'">'.$item_name.'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
-		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="2" /><input type="hidden" name="orderBy" value="" /></form>';
+		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="100" /><input type="hidden" name="orderBy" value="" /></form>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';
