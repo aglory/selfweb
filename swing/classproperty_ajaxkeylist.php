@@ -14,11 +14,14 @@
 
 		$btn[] = '<a class="btn keyvalue" rel="'.$o['id'].'" href="'.ActionLink('ajaxvaluelist','classproperty',array('propertyid' => $o['id']),false).'">键值</a>';
 		
-		$btn[] = '<a class="btn" rel="'.$o['id'].'" href="'.ActionLink('list','classpropertyvalue',array('keyid' => $o['id']),false).'">键值详情</a>';
+		$btn[] = '<a class="btn keyvaluelist" rel="'.$o['id'].'" target="_blank" href="'.ActionLink('list','classpropertyvalue',array('keyid' => $o['id']),false).'">键值详情</a>';
 		return implode('',$btn);
 	}
 
 	header('Content-Type: application/json');	
+	
+	$classid = 0;
+	
 	$pageIndex = 1;
 	$pageSize = 20;
 	$orderBy;
@@ -101,7 +104,7 @@
 			$item_name = mb_substr($item_name,0,58,'utf-8').'..';
 		}
 		$value[] = '<tr id="tr_property_key_'.$item['id'].'"><td title="'.strip_tags($item['name']).'">'.$item_name.'</td><td>'.$targetlevels[$item['targetlevel']].'</td>'.'<td>'.$displaytypes[$item['displaytype']].'</td><td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
-		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="100" /><input type="hidden" name="orderBy" value="" /></form>';
+		$form[] = '<form id="groupform'.$item['id'].'" target="_blank" action="'.ActionLink('ajaxvaluelist','classproperty',null,false).'" method="post" class="groupform"><input type="hidden" id="classid" name="classid" value="'.$classid.'" /><input type="hidden" id="propertyid" name="propertyid" value="'.$item['id'].'" /><input type="hidden" name="pageIndex" value="1" /><input type="hidden" name="pageSize" value="100" /><input type="hidden" name="orderBy" value="" /></form>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';

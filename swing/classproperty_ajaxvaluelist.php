@@ -20,7 +20,7 @@
 		if(empty($o['id'])){
 			$name = '新增属性值';
 		}
-		return '<a rel="'.$o['keyid'].'" class="btn valueeditor" title="'.$name.'" href="'.ActionLink('dialogvalueeditor','classproperty',array('id' => $o['id']),false).'">'.$name.'</a>';;
+		return '<a rel="'.$o['keyid'].'" class="btn valueeditor" title="'.$name.'" href="'.ActionLink('dialogvalueeditor','classproperty',array('id' => $o['id'] ,'classid' => $o['classid'],'keyid' => $o['keyid']),false).'">'.$name.'</a>';;
 	}
 
 	header('Content-Type: application/json');	
@@ -44,6 +44,8 @@
 	$whereClause = array();
 	$whereParams = array();
 	$propertyid = 0;
+	$classid = 0;
+	
 	if(array_key_exists('propertyid',$_REQUEST)){
 		$propertyid = intval($_REQUEST['propertyid']);
 		if($propertyid > 0){
@@ -96,7 +98,7 @@
 	
 	$targetlevels = array('0' => '','1' => 'normal','2' => 'primary','3' => 'info','4' => 'warn','5' => 'error');
 	
-	$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><th>属性值</th><th>重要程度</th><th></th><th>顺序</th><th><span class="ChildAddLink">'.funRenderEditorBtn(Array('id' => 0,'keyid' => $propertyid)).'</span></th></tr>';
+	$value[] = '<tr class="tr_property_key tr_property_key_'.$propertyid.'_value"><th>属性值</th><th>重要程度</th><th></th><th>顺序</th><th><span class="ChildAddLink">'.funRenderEditorBtn(Array('id' => 0 ,'classid' => $classid ,'keyid' => $propertyid)).'</span></th></tr>';
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
 		$item_value = strip_tags($item['value']);
 		if(mb_strlen($item_value,'utf-8') > 60){

@@ -310,5 +310,4 @@ $(function(){
 		});
 		return false;
 	});
-	
 });
