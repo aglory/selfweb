@@ -8,7 +8,7 @@
 	}
 	
 	if(!empty($id)){
-		$sth = $pdomysql -> prepare("select * from tbClassPropertyKeyInfo where id=$id");
+		$sth = $pdomysql -> prepare("select * from tbClassPropertyValueInfo where id=$id");
 		$sth -> execute();
 		foreach($sth->fetchAll(PDO::FETCH_ASSOC) as $item){
 			$order = $item['order'];
@@ -17,7 +17,7 @@
 ?>
 
 <div class="form DialogStyle">
-	<form action="<?php ActionLink('ajaxchangeorder','classproperty')?>" method="get" id="editorForm" class="block-content form">
+	<form action="<?php ActionLink('ajaxvaluechangeorder','classproperty')?>" method="get" id="editorForm" class="block-content form">
 		<input name="id" type="hidden" value="<?php echo $id; ?>" />
 		<table style="width:100%">
 			<tr>

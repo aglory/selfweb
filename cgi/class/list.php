@@ -27,8 +27,8 @@ function funLeveCount($item){
 			<?php
 				$sthschool = $pdomysql -> prepare("select * from tbSchoolInfo where guid = :guid;"); 
 				$sthclass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :id and status = 1 order by `order` desc,id desc;");
-				$sthpropertykey = $pdomysql -> prepare("select * from tbClassPropertyKeyInfo where classid = :classid and status = 1 order by `order` desc;"); 
-				$sthpropertyvalue = $pdomysql -> prepare("select * from tbClassPropertyValueInfo where classid = :classid and keyid = :keyid and status = 1 order by `order` desc;"); 
+				$sthpropertykey = $pdomysql -> prepare("select * from tbClassPropertyKeyInfo where classid = :classid and status = 1 order by `order` desc,id desc;"); 
+				$sthpropertyvalue = $pdomysql -> prepare("select * from tbClassPropertyValueInfo where classid = :classid and keyid = :keyid and status = 1 order by `order` desc,id desc;"); 
 				
 				
 				$guid = '';

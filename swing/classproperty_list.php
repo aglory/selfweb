@@ -8,14 +8,15 @@
 <article class="container_12">
     <section class="grid_12">
         <div class="block-border">
-            <form action="<?php ActionLink('ajaxlist','classproperty')?>" method="post" id="mainForm" class="block-content form">
+			<div id="divFormGroup" style="display:none;"></div>
+            <form action="<?php ActionLink('ajaxkeylist','classproperty')?>" method="post" id="mainForm" class="block-content form">
 				<input type="hidden" id="pageIndex" name="pageIndex" value="1" />
 				<input type="hidden" id="pageSize" name="pageSize" value="20" />
 				<input type="hidden" id="orderBy" name="orderBy" value="" />
 				<input type="hidden" id="classid" name="classid" value="<?php echo $classid ?>" />
                 <h1>属性管理</h1>	
 		        <div class="block-controls">
-				    <div class="AddLink"><a class="editor" href="<?php ActionLink('dialogeditor','classproperty',array('id' => 0,'classid' => $classid))?>" title="新增属性"><span></span><q>新增属性</q></a></div>
+				    <div class="AddLink"><a class="keyeditor" href="<?php ActionLink('dialogkeyeditor','classproperty',array('id' => 0,'classid' => $classid))?>" title="新增属性"><span></span><q>新增属性</q></a></div>
 			        <ul class="controls-buttons">
 				        <li><input id="name" name="name" type="text" placeholder="输入属性名称查询" /></li>
 						<li>重要程度<select name="targetlevel">
@@ -46,28 +47,28 @@
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="name">属性名称</a>
                             </th>
-							<th scope="col">
+							<th scope="col" style="width:80px;">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="targetlevel">重要程度</a>
 							</th>
-							<th scope="col">
+							<th scope="col" style="width:80px;">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="displaytype">展示方式</a>
 							</th>
-                            <th scope="col">
+                            <th scope="col" style="width:80px;">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="`order`">顺序</a>
                             </th>
-                            <th scope="col" class="table-actions">操作</th>
+                            <th scope="col" class="table-actions" style="width:180px">操作</th>
                         </tr>
                         </thead>
                         <tbody class="content">
