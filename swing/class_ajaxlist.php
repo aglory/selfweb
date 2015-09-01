@@ -81,6 +81,7 @@
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
 		$value[] = '<tr><td>'.htmlspecialchars($item['name']).'</td>'.
 		'<td>'.($item['schoolname']===null?'-':htmlspecialchars($item['schoolname'])).'</td>'.
+		'<td class="decimal price">'.$item['price'].'</td>'.
 		'<td>'.$item['order'].'</td><td>'.funRenderOperator($item).'</td></tr>';
 	}
 	if(empty($value)){

@@ -2,6 +2,16 @@
 	cursor:pointer;
 }
 
+.decimal{
+	text-align:right;
+}
+
+.price{
+	font-style:italic;
+	font-weight:bolder;
+}
+
+
 
 .mark{color:green;}
 .unmark,.warn{color:red;}
