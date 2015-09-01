@@ -36,24 +36,28 @@
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
-                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="Name">班级名称</a>
-                            </th>
-                            <th scope="col">
-								学校名称
+                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="c.Name">班级名称</a>
                             </th>
                             <th scope="col">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
-                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="price">学费</a>
+                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="s.Name">学校名称</a>
                             </th>
                             <th scope="col">
                                 <span class="column-sort">
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
-                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="'order'">顺序</a>
+                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="c.price">学费</a>
+                            </th>
+                            <th scope="col">
+                                <span class="column-sort">
+						            <a class="sort-up"></a>
+						            <a class="sort-down"></a>
+					            </span>
+                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="c.order">顺序</a>
                             </th>
                             <th scope="col" class="table-actions">操作</th>
                         </tr>
