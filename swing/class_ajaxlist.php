@@ -103,8 +103,6 @@
 	$result['status'] = count($errors) == 0 ? true : false;
 	$result['value'] = $value;
 	$result['message'] = implode('\r\n',$errors);
-	$result['debug']="select c.*,s.name as schoolname from tbClassInfo as c left join tbSchoolInfo as s on c.schoolid=s.id $whereClause $orderBy limit $pageIndex,$pageSize;";
-	
 	
 	echo json_encode($result ,true);
 ?>
