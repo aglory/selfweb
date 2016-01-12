@@ -26,17 +26,17 @@ foreach($sthSchool -> fetchAll(PDO::FETCH_ASSOC) as $schoolItem){
 	<body>
 		<header class="header">
 			<div class="text-center re">
-				<a class="" href="<?php ActionLink('index','index')?>"><span class="iconfont icon-keyboardarrowleft left-icon h3"></span></a>
-				<strong class=" h3"><?php echo htmlspecialchars($school['name'])?></strong>
+				<a class="" href="<?php ActionLink('index','index')?>"><span class="iconfont icon-keyboardarrowleft left-icon h1"></span></a>
+				<strong class=" h1"><?php echo htmlspecialchars($school['name'])?></strong>
 			</div>
 		</header>
 		<section>
 			<ul class="list">
 				<?php
 				$sthClass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :schoolid and status = 1 order by `order` desc,id desc;;");
-				$sthClass -> execute(array('schoolid' => $schoolItem['id']));
+				$sthClass -> execute(array('schoolid' => $school['id']));
 				foreach($sthClass -> fetchAll(PDO::FETCH_ASSOC) as $classItem){
-					echo '<li class="list-inline row"><a href="',ActionLink('class','index',array('classid' => $classItem['guid'],'schoolid' => $schoolId),false),'" class="collapse in h4">',htmlspecialchars($classItem['name']),'</a></li>';
+					echo '<li class="list-inline row"><a href="',ActionLink('class','index',array('classid' => $classItem['guid'],'schoolid' => $schoolId),false),'" class="collapse in h2">',htmlspecialchars($classItem['name']),'</a></li>';
 				}
 				?>
 				

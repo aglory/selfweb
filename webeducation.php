@@ -20,7 +20,7 @@
 		$params = func_get_args();
 		if(empty($params))return;
 		$params = array_reverse($params);
-		include './cgi/mobile/'.implode(DIRECTORY_SEPATRATOR,$params).'.php';
+		include './cgi/'.implode(DIRECTORY_SEPATRATOR,$params).'.php';
 	}
 	
 	$model="index";
@@ -36,9 +36,9 @@
 	define('Action',$action);
 	define('Execute',true);
 	
-	if(file_exists("./cgi/mobile/$model/$action.php")){
-		require "./cgi/mobile/$model/$action.php";
+	if(file_exists("./cgi/$model/$action.php")){
+		require "./cgi/$model/$action.php";
 	}else{
-		require "./cgi/mobile/index/index.php";
+		require "./cgi/index/index.php";
 	}
 ?>

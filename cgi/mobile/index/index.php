@@ -21,7 +21,7 @@ include './cgi/pdo.php';
 					$sth = $pdomysql -> prepare("select * from tbSchoolInfo where status=1 order by `order` desc,id desc;;"); 
 					$sth -> execute();
 					foreach($sth -> fetchAll(PDO::FETCH_ASSOC) as $item){
-						echo '<li class="list-inline row"><a href="',ActionLink('school','index',array('id'=>$item['guid']),false),'" class="collapse in h3">',$item['name'],'</a></li>';
+						echo '<li class="list-inline row"><a href="',ActionLink('school','index',array('id'=>$item['guid']),false),'" class="collapse in h1">',$item['name'],'</a></li>';
 					}
 				?>
 				

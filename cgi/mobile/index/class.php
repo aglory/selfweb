@@ -31,8 +31,8 @@ if(array_key_exists('classid',$_GET)){
 	<body>
 		<header class="header">
 			<div class="text-center re">
-				<a class="" href="<?php ActionLink('index','index')?>"><span class="iconfont icon-keyboardarrowleft left-icon h3"></span></a>
-				<strong class=" h3"><?php echo htmlspecialchars($school['name'])?></strong>
+				<a class="" href="<?php ActionLink('school','index',array('id' => $schoolId))?>"><span class="iconfont icon-keyboardarrowleft left-icon h1"></span></a>
+				<strong class=" h1"><?php echo htmlspecialchars($school['name'])?></strong>
 			</div>
 		</header>
 		<section>
@@ -47,7 +47,7 @@ if(array_key_exists('classid',$_GET)){
 				$sthClass = $pdomysql -> prepare("select * from tbClassInfo where guid = :guid and status = 1 order by `order`;");
 				$sthClass -> execute(array('guid' => $classId));
 				foreach($sthClass -> fetchAll(PDO::FETCH_ASSOC) as $class){
-					echo '<li class="list-inline row">学时：';
+					echo '<li class="list-inline row h2">学时：';
 					if(!empty($class['teachdate'])){
 						echo $class['teachdate'],$teachunits[$class['teachunit']];
 					}else{
@@ -71,20 +71,42 @@ if(array_key_exists('classid',$_GET)){
 						}
 					}
 					if(!empty($diplomabefore)){
-						echo '<li class="list-inline row">学历要求：',implode('、',$diplomabefore),'</li>';
+						echo '<li class="list-inline row h2">学历要求：',implode('、',$diplomabefore),'</li>';
 					}
 					
 					if(!empty($diplomaafter)){
-						echo '<li class="list-inline row">毕业文凭：',implode('、',$diplomaafter),'</li>';
+						echo '<li class="list-inline row h2">毕业文凭：',implode('、',$diplomaafter),'</li>';
 					}
 					
-					echo '<li class="list-inline row">费用：';
+					echo '<li class="list-inline row h2">费用：';
 					if($class['price']> 0){
 						echo $class['price'];
 					}else{
 						echo '-';
 					}
 					echo '</li>';
+					
+					
+					$sthpropertykey = $pdomysql -> prepare("select * from tbClassPropertyKeyInfo where classid = :classid and status = 1 order by `order` desc,id desc;"); 
+					$sthpropertyvalue = $pdomysql -> prepare("select * from tbClassPropertyValueInfo where classid = :classid and keyid = :keyid and status = 1 order by `order` desc,id desc;"); 
+					
+					$sthpropertykey -> execute(array('classid' => $class['id']));
+					foreach($sthpropertykey -> fetchAll(PDO::FETCH_ASSOC) as $propertykey){
+						$sthpropertyvalue -> execute(array('classid' => $class['id'],'keyid' => $propertykey['id']));
+						$firstproperty = true;
+						if($sthpropertyvalue -> rowCount() > 0){
+							foreach($sthpropertyvalue -> fetchAll(PDO::FETCH_ASSOC) as $propertyvalue){
+								if($firstproperty) {
+									echo '<dl><dt class="h2"><strong>',htmlspecialchars($propertykey['name']),'</strong></dt>';
+									$firstproperty = false;
+								}
+								echo '<dd>',$propertyvalue['value'],'</dd>';
+							}
+						}
+						if(!$firstproperty){
+							echo '</dl>';
+						}
+					}
 				}
 				?>
 				
