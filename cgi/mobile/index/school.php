@@ -33,7 +33,7 @@ foreach($sthSchool -> fetchAll(PDO::FETCH_ASSOC) as $schoolItem){
 		<section>
 			<ul class="list">
 				<?php
-				$sthClass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :schoolid and status = 1 order by `order`;");
+				$sthClass = $pdomysql -> prepare("select * from tbClassInfo where schoolid = :schoolid and status = 1 order by `order` desc,id desc;;");
 				$sthClass -> execute(array('schoolid' => $schoolItem['id']));
 				foreach($sthClass -> fetchAll(PDO::FETCH_ASSOC) as $classItem){
 					echo '<li class="list-inline row"><a href="',ActionLink('class','index',array('classid' => $classItem['guid'],'schoolid' => $schoolId),false),'" class="collapse in h4">',htmlspecialchars($classItem['name']),'</a></li>';
