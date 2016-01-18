@@ -1,10 +1,20 @@
-header{
-	background-color:green;
+body{
+	font-size:24px;
 }
-.iconfont{
+header.header{
+	background-color:green;
+	position:relative;
+}
+.header .h1,.iconfont{
 	color:#fff;
 }
 .row{
 	border-bottom:1px solid #feb44b;
 	margin-right:1px;
+}
+
+.left-icon{
+	position:absolute;
+	top:0px;
+	left:0px;
 }
