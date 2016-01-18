@@ -8,32 +8,37 @@ $classId = 0;
 if(array_key_exists('schoolid',$_GET)){
 	$schoolId = $_GET['schoolid'];
 }
-$sthSchool = $pdomysql -> prepare("select * from tbSchoolInfo where guid = :guid");
-$sthSchool -> execute(array('guid' => $schoolId));
-
-$school = array('id' => 0,'name' => '');
-foreach($sthSchool -> fetchAll(PDO::FETCH_ASSOC) as $schoolItem){
-	$school = $schoolItem;
-}
 
 if(array_key_exists('classid',$_GET)){
 	$classId = $_GET['classid'];
 }
 
+$sthTitleInfo = $pdomysql -> prepare("select tbSchoolInfo.id as schoolid,tbSchoolInfo.name as schoolname,tbClassInfo.id as classid,tbClassInfo.name as classname from tbSchoolInfo inner join tbClassInfo on tbSchoolInfo.id = tbClassInfo.schoolid where tbClassInfo.guid = :guid");
+$sthTitleInfo -> execute(array('guid' => $classId));
+
+$titleInfo = array('schoolid' => 0,'schoolname' => '','classid' => 0,'classname' => '');
+foreach($sthTitleInfo -> fetchAll(PDO::FETCH_ASSOC) as $titleInfoItem){
+	$titleInfo = $titleInfoItem;
+}
+
 ?>
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<meta name="keywords"content="永恒的父爱,信息咨询" />
+		<title>永恒的父爱 -&gt; <?php echo  htmlspecialchars($titleInfo['schoolname']) ?> -&gt; <?php echo htmlspecialchars($titleInfo['classname'])?></title>
+		<meta name="keywords"content="永恒的父爱,信息咨询,<?php echo  htmlspecialchars($titleInfo['schoolname']) ?> , <?php echo htmlspecialchars($titleInfo['classname'])?>" />
 		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/css/iconfont.css" />
+		<link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="/css/mobile/base.css" />
 	</head>
 	<body>
 		<header class="header">
-			<div class="text-center re">
-				<a class="" href="<?php ActionLink('school','index',array('id' => $schoolId))?>"><span class="iconfont icon-keyboardarrowleft left-icon h1"></span></a>
-				<strong class=" h1"><?php echo htmlspecialchars($school['name'])?></strong>
-			</div>
+			<a class="" href="<?php ActionLink('school','index',array('id' => $schoolId))?>">
+				<div class="text-center">
+					<span class="iconfont icon-angle-left left-icon h1" title = "<?php echo  htmlspecialchars($titleInfo['schoolname']) ?>"></span>
+					<strong class=" h1"><?php echo htmlspecialchars($titleInfo['classname'])?></strong>
+				</div>
+			</a>
 		</header>
 		<section>
 			<ul>

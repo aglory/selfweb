@@ -16,19 +16,22 @@ foreach($sthSchool -> fetchAll(PDO::FETCH_ASSOC) as $schoolItem){
 }
 
 ?>
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<meta name="keywords"content="永恒的父爱,信息咨询" />
+		<title>永恒的父爱 -&gt; <?php echo htmlspecialchars($school['name']) ?></title>
+		<meta name="keywords"content="永恒的父爱,信息咨询,<?php echo htmlspecialchars($school['name']) ?>" />
 		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/css/iconfont.css" />
+		<link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" />
 		<link type="text/css" rel="stylesheet" href="/css/mobile/base.css" />
 	</head>
 	<body>
 		<header class="header">
-			<div class="text-center re">
-				<a class="" href="<?php ActionLink('index','index')?>"><span class="iconfont icon-keyboardarrowleft left-icon h1"></span></a>
-				<strong class=" h1"><?php echo htmlspecialchars($school['name'])?></strong>
-			</div>
+			<a class="" href="<?php ActionLink('index','index')?>">
+				<div class="text-center"><span class="iconfont  icon-angle-left left-icon h1"></span>
+					<strong class=" h1"><?php echo htmlspecialchars($school['name'])?></strong>
+				</div>
+			</a>
 		</header>
 		<section>
 			<ul class="list">
