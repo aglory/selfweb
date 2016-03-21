@@ -79,7 +79,7 @@
 	$value = Array();
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
-		$value[] = '<tr><td>'.htmlspecialchars($item['schoolname']).'</td>';
+		$value[] = '<tr><td><input type="checkbox" class="checkboxid" value="'.$item['id'].'"/>'.htmlspecialchars($item['schoolname']).'</td>';
 		$value[] = '<td><span title="'.$item['classname'].'">'.substr($item['studentname'],0,30).'</span></td>';
 		$value[] = '<td>'.$item['studentname'].'/'.$item['contacttel'].'</td>';
 		$value[] = '<td>'.$item['datecreate'].'</td><td>'.$item['datemodify'].'</td><td>'.funRenderStatus($item).'</td><td>'.funRenderOperator($item).'</td></tr>';
@@ -90,7 +90,7 @@
 		$value = implode('',$value);
 	}
 	
-	$sthcount = $pdomysql -> prepare("select count(1) from tbMessageInfo $whereClause");
+	$sthcount = $pdomysql -> prepare("select count(1) from tbApplyInfo $whereClause");
 	$sthcount -> execute();
 	
 	$errorcount = $sthcount -> errorInfo();

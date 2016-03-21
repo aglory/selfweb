@@ -31,7 +31,7 @@ header("Content-Type: text/html;charset=utf-8");
 					</tr>
 					<tr>
 						<td class="label">
-							<label for="message">电话：</label>
+							<label for="message">提问：</label>
 						</td>
 						<td class="input">
 							<textarea id='message' class="inputdom" name='message' placeholder="请留下你要咨询的问题，我们将为你解答"></textarea>

@@ -1,14 +1,20 @@
 <?php
 	if(!defined('Execute') && !defined('Administartor')){ exit();}
 	
-	$id = 0;
+	$ids = 0;
 	if(array_key_exists('id',$_GET)){
-		$id = intval($_GET['id']);
+		$ids = intval($_GET['id']);
+	}
+	if(array_key_exists('ids',$_POST) && is_array($_POST['ids'])){
+		$ids = implode(',', array_map(function($item){return intval($item);} ,$_POST['ids']));
+		if(strlen($ids)==0){
+			$ids = 0;
+		}
 	}
 	
 	$timespan = date('Y-m-d H:i:s',time());
 	
-	$sth = $pdomysql -> prepare("update tbApplyInfo set status = 2, datemodify = :timespan where id=$id and status != 2;");
+	$sth = $pdomysql -> prepare("update tbApplyInfo set status = 2, datemodify = :timespan where id in($ids) and status != 2;");
 	$sth -> execute(array('timespan' => $timespan));
 	
 	header('Content-Type: application/json');
@@ -18,7 +24,7 @@
 		$errors[] = $error[2];
 	}
 	
-	$result = array('id' =>$id);
+	$result = array('id' =>$ids);
 	$result['status'] = count($errors) == 0 ? true : false; 
 	$result['message'] = implode('\r\n',$errors);
 	echo json_encode($result,true);

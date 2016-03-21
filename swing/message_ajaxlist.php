@@ -79,7 +79,7 @@
 	$value = Array();
 	
 	foreach($sthlist->fetchAll(PDO::FETCH_ASSOC) as $item){
-		$value[] = '<tr><td>'.htmlspecialchars($item['tel']).'</td><td><span title="'.$item['msg'].'">'.substr($item['msg'],0,30).'</span></td><td>'.$item['datecreate'].'</td><td>'.$item['datemodify'].'</td><td>'.funRenderStatus($item).'</td><td>'.funRenderOperator($item).'</td></tr>';
+		$value[] = '<tr><td><input type="checkbox" class="checkboxid" value="'.$item['id'].'"/>'.htmlspecialchars($item['tel']).'</td><td><span title="'.$item['msg'].'">'.substr($item['msg'],0,30).'</span></td><td>'.$item['datecreate'].'</td><td>'.$item['datemodify'].'</td><td>'.funRenderStatus($item).'</td><td>'.funRenderOperator($item).'</td></tr>';
 	}
 	if(empty($value)){
 		$value='<tr><td colspan="1000">暂无数据</td></tr>';
