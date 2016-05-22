@@ -14,7 +14,6 @@
 				        <li><select name='status'><option value="0">全部</option><option value="1">未标记</option><option value="2">已标记</option><option value="3">已删除</option></select></li>
 				        <li><a class="btn" id="btnSeacher" title="搜索">搜索<img src="/images/icons/fugue/navigation.png" width="16" height="16"></a></li>
 				        <li class="sep"></li>
-						<li><a class="btn" id="btnDelete" title="删除" href="<?php ActionLink('ajaxdelete','message',null,true)?>">删除</a></li>
 				        <li><a class="btn" id="btnRefresh" title="刷新"><img src="/images/icons/fugue/arrow-circle.png" width="16" height="16"></a></li>
 			        </ul>
 		        </div>
@@ -27,7 +26,6 @@
 						            <a class="sort-up"></a>
 						            <a class="sort-down"></a>
 					            </span>
-								<input id="checkedAll" type="checkbox" />
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="tel">电话</a>
                             </th>
                             <th scope="col">

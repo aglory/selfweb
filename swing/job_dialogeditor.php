@@ -72,7 +72,7 @@
 			</tr>
 			<tr>
 				<td class="title">
-					价格：
+					服务费用：
 				</td>
 				<td>
 					<input name="serviceprice" type="text" value="<?php echo $serviceprice?>" />

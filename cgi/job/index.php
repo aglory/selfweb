@@ -65,20 +65,21 @@ function funLeveCount($item){
 			$sthjob -> execute($params);
 
 			$methods = array('0' => '全部' , '1' => '直签' , '2' => '派遣' , '4' => '先派遣后直签');
-			$prices = array(0 => '全部');
+			$prices = array();
 			
 			$jobs = $sthjob -> fetchAll(PDO::FETCH_ASSOC);
 			$categories = array();
+			
 			foreach($jobs as $item){
 				if(!array_key_exists($item['categoryid'],$categories)){
 					$categories[$item['categoryid']] = $item['categoryname'];
 				}
 				$serviceprice = intval($item['serviceprice']);
-				if(!array_key_exists($serviceprice,$prices)){
-					$prices[$serviceprice] = $serviceprice;
+				if(!in_array($serviceprice,$prices) && $serviceprice!= 0){
+					$prices[] = $serviceprice;
 				}
+				sort($prices);
 			}
-			arsort($prices,2);
 		?>
 		<div class="blockborder wrap search">
 			<table class="class">
@@ -92,10 +93,11 @@ function funLeveCount($item){
 					</td>
 				</tr>
 				<tr>
-					<td class="coltitle">价格区间：</td><td class="colvalue">
+					<td class="coltitle">服务费用：</td><td class="colvalue">
 					<?php
-					foreach($prices as $pricekey => $pricevalue){
-						echo '<a class="'.($pricekey == $pricemin ? "active":"" ).'" href="',actionlink('index','job',array('pricemin' => $pricekey,'pricemax' => $pricekey,'methodtype' => $method,'categoryid' => $categoryid),false),'">',$pricevalue,'</a>';
+					echo '<a class="'.(0 == $pricemin ? "active":"" ).'" href="',actionlink('index','job',array('pricemin' => 0,'pricemax' => 0,'methodtype' => $method,'categoryid' => $categoryid),false),'">全部</a>';
+					foreach($prices as $price){
+						echo '<a class="'.($price == $pricemin ? "active":"" ).'" href="',actionlink('index','job',array('pricemin' => $price,'pricemax' => $price,'methodtype' => $method,'categoryid' => $categoryid),false),'">',$price,'</a>';
 					}
 					?>
 					</td>
@@ -108,6 +110,7 @@ function funLeveCount($item){
 				foreach($categories as $categorykey => $categoryvalue){
 					echo '<h1>',$categoryvalue,'</h1>';
 					echo '<table class="class" id="class',$item['guid'],'"> ';
+					echo '<tr><th class="t_c">职位</th><th class="t_c">劳务方式</th><th class="t_c">服务费用</th></tr>';
 					foreach($jobs as $item){
 						if($item['categoryid'] != $categorykey)
 							continue;

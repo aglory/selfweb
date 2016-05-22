@@ -63,8 +63,15 @@
 					            </span>
                                 <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="j.categoryid">类别</a>
                             </th>
+                            <th scope="col">
+                                <span class="column-sort">
+						            <a class="sort-up"></a>
+						            <a class="sort-down"></a>
+					            </span>
+                                <a href="javascript:;" title="单击排序" class="btn-sort-order" sort-expression="j.sex">类别</a>
+                            </th>
 							<th scope="col">
-								价格
+								服务费用
 							</th>
                             <th scope="col">
                                 <span class="column-sort">

@@ -1,8 +1,4 @@
 <?php
-
-header('Access-Control-Allow-Origin:*'); 
-header('Access-Control-Allow-Methods:POST,GET');
-
 if(!defined('Execute')){ exit();}
 header("Content-Type: text/html;charset=utf-8");
 include './cgi/pdo.php';

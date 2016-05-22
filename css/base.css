@@ -24,7 +24,15 @@ header .navigationitem  a.current,header .navigationitem  a:hover{
 header ul:after,footer ul:after{clear:both;height:0px;display:block;content:"a";visibility:hidden;clear:both;}
 .blockborder{border:solid 1px #e2e2e2;border-radius:10px;}
 
-
+.t_c{
+text-align:center;
+}
+.t_l{
+text-align:left;
+}
+.t_r{
+text-align:right;
+}
 
 
 
