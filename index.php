@@ -75,4 +75,5 @@ if(isMobile()){
 }else{
 	include 'webeducation.php';
 }
+
 ?>
